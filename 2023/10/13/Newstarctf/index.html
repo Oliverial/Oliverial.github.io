@@ -45,7 +45,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2023-10-13T08:11:59.000Z">
-<meta property="article:modified_time" content="2023-10-13T12:36:41.754Z">
+<meta property="article:modified_time" content="2023-10-15T00:44:49.432Z">
 <meta property="article:author" content="Oliveria">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1628,7 +1628,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1697200610006),
+    lastupdate: new Date(1697330741682),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2467,6 +2467,27 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p><img src="/../image/23.png" class="lazyload" data-srcset="/../image/23.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="23"></p>
 <p>摩斯密码解码获得flag</p>
 <p><img src="/../image/24.png" class="lazyload" data-srcset="/../image/24.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="24"></p>
+<h2 id="Affine"><a href="#Affine" class="headerlink" title="Affine"></a>Affine</h2><p>通过flag获得a,b值</p>
+<p><img src="/../image/25.png" class="lazyload" data-srcset="/../image/25.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="25"></p>
+<p>affine解码获得flag</p>
+<p><img src="/../image/26.png" class="lazyload" data-srcset="/../image/26.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="26"></p>
+<h2 id="babyxor"><a href="#babyxor" class="headerlink" title="babyxor"></a>babyxor</h2><p>通过flag求得key</p>
+<p><img src="/../image/27.png" class="lazyload" data-srcset="/../image/27.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="27"></p>
+<p><img src="/../image/28.png" class="lazyload" data-srcset="/../image/28.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="28"></p>
+<h2 id="babyaes"><a href="#babyaes" class="headerlink" title="babyaes"></a>babyaes</h2><p>key为32bytes iv为16bytes 进行异或高位16bytes未改变，即可获得key</p>
+<p>a为key低16bytes和iv异或再和1异或获得，逆序即可获得iv</p>
+<p><img src="/../image/29.png" class="lazyload" data-srcset="/../image/29.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="29"></p>
+<p>由题目易获得为AES模式，解码即可获得flag{firsT_cry_Aes}</p>
+<p><img src="/../image/30.png" class="lazyload" data-srcset="/../image/30.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="30"></p>
+<h2 id="babyrsa"><a href="#babyrsa" class="headerlink" title="babyrsa"></a>babyrsa</h2><p>素数分解</p>
+<p><img src="/../image/31.png" class="lazyload" data-srcset="/../image/31.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="31"></p>
+<p>根据分解获得的素数算出n的欧拉函数，算出e在模phi上的逆元d，获得私钥</p>
+<p><img src="/../image/32.png" class="lazyload" data-srcset="/../image/32.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="32"></p>
+<p><img src="/../image/33.png" class="lazyload" data-srcset="/../image/33.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="33"></p>
+<h2 id="Small-d"><a href="#Small-d" class="headerlink" title="Small d"></a>Small d</h2><p>观察代码可发现为![35](..&#x2F;image&#x2F;35.png低解密指数攻击，使用低解密指数攻击脚本，获得flag</p>
+<p><img src="/../image/35.png" class="lazyload" data-srcset="/../image/35.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="35"></p>
+<p><img src="/../image/34.png" class="lazyload" data-srcset="/../image/34.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="34"></p>
+<p><img src="/../image/35.png" class="lazyload" data-srcset="/../image/35.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="35"></p>
 
   </div>
   
@@ -2491,10 +2512,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2023-10-13T20:36:41+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2023-10-15T08:44:49+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Oct 13, 2023</p>
+    <p>更新于：Oct 15, 2023</p>
   </a>
 </div>
 
@@ -2631,7 +2652,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#brainfuck"><span class="toc-text">brainfuck</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Caesar%E2%80%99s-Secert"><span class="toc-text">Caesar’s Secert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fence"><span class="toc-text">Fence</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vigenere"><span class="toc-text">Vigenère</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyencoding"><span class="toc-text">babyencoding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CyberChef%E2%80%99s-Secret"><span class="toc-text">CyberChef’s Secret</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%AF%86%E5%9B%BE%E7%89%87"><span class="toc-text">机密图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%84%E6%BC%8F%E7%9A%84%E7%A7%98%E5%AF%86"><span class="toc-text">泄漏的秘密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E9%AB%98%E6%89%8B"><span class="toc-text">游戏高手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BAWord%E6%96%87%E6%A1%A3"><span class="toc-text">新建Word文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B8%E4%B8%8D%E6%B6%88%E9%80%9D%E7%9A%84%E7%94%B5%E6%B3%A2"><span class="toc-text">永不消逝的电波</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#brainfuck"><span class="toc-text">brainfuck</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Caesar%E2%80%99s-Secert"><span class="toc-text">Caesar’s Secert</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fence"><span class="toc-text">Fence</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vigenere"><span class="toc-text">Vigenère</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyencoding"><span class="toc-text">babyencoding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CyberChef%E2%80%99s-Secret"><span class="toc-text">CyberChef’s Secret</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%BA%E5%AF%86%E5%9B%BE%E7%89%87"><span class="toc-text">机密图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%84%E6%BC%8F%E7%9A%84%E7%A7%98%E5%AF%86"><span class="toc-text">泄漏的秘密</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E9%AB%98%E6%89%8B"><span class="toc-text">游戏高手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BB%BAWord%E6%96%87%E6%A1%A3"><span class="toc-text">新建Word文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B0%B8%E4%B8%8D%E6%B6%88%E9%80%9D%E7%9A%84%E7%94%B5%E6%B3%A2"><span class="toc-text">永不消逝的电波</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Affine"><span class="toc-text">Affine</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyxor"><span class="toc-text">babyxor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyaes"><span class="toc-text">babyaes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyrsa"><span class="toc-text">babyrsa</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Small-d"><span class="toc-text">Small d</span></a></li></ol>
     </div>
   </section>
 
@@ -3209,7 +3230,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Oliverial的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2023/10/13/Newstarctf/","name":"Newstarctf"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Oliverial的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Newstarctf","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/10/13/Newstarctf/"},"author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Oliverial的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2023/10/13/Newstarctf/","wordCount":0,"datePublished":"2023-10-13T08:11:59.000Z","dateModified":"2023-10-13T12:36:41.754Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Oliverial的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2023/10/13/Newstarctf/","name":"Newstarctf"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Oliverial的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Newstarctf","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/10/13/Newstarctf/"},"author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Oliverial的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2023/10/13/Newstarctf/","wordCount":0,"datePublished":"2023-10-13T08:11:59.000Z","dateModified":"2023-10-15T00:44:49.432Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
