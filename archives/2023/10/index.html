@@ -1624,7 +1624,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1697855135600),
+    lastupdate: new Date(1697855497087),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2396,17 +2396,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class='md article-desc' itemprop="articleBody">
     
       
-        构造函数1void __construct ([ mixed $args [, $... ]] )
-
-创建实例直接运行，无法被替代
-析构函数1void __destruct ( void )
-
-对象结束时运行
-继承class 新的类 extends 原有类
-RSArsa加密原理生成至少两个多位素数 q和p
+        10.21RSArsa加密原理生成至少两个多位素数 q和p
 计算n&#x3D;q*p
 计算n的欧拉函数 及m&#x3D;（p-1）*（q-1)
-在...
+在（1，m）区间内找到一个跟m互素的数字e
+根据公式获得密文 
+
+rsa解密原理由n分解获得q，p的值
+计算n的欧拉函数m
+计算e在模m上的逆元 及 inverse（e，m）
+根据公式获得明文
+
+补码正数     原码&#x3D;反码&#x3D;补码...
       
     
   </div>
