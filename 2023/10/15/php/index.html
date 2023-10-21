@@ -36,14 +36,16 @@
   <title>php - Oliverial的blog</title>
   <meta name="keywords" content="null">
   <meta desc name="description" content="Oliverial的blog - Oliveria - Oliverial的blog">
-  <meta property="og:type" content="article">
+  
+<meta property="og:type" content="article">
 <meta property="og:title" content="php">
 <meta property="og:url" content="http://example.com/2023/10/15/php/index.html">
 <meta property="og:site_name" content="Oliverial的blog">
+<meta property="og:description" content="构造函数1void __construct ([ mixed $args [, $... ]] )  创建实例直接运行，无法被替代 析构函数1void __destruct ( void )  对象结束时运行 继承class 新的类 extends 原有类 RSArsa加密原理生成至少两个多位素数 q和p 计算n&#x3D;q*p 计算n的欧拉函数 及m&#x3D;（p-1）*（q-1) 在（1，">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2023-10-15T06:29:34.000Z">
-<meta property="article:modified_time" content="2023-10-15T06:29:34.514Z">
+<meta property="article:modified_time" content="2023-10-21T02:25:05.745Z">
 <meta property="article:author" content="Oliveria">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1626,7 +1628,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1697351669917),
+    lastupdate: new Date(1697855135600),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2422,7 +2424,41 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    
+    <h2 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void __construct ([ mixed $args [, $... ]] )</span><br></pre></td></tr></table></figure>
+
+<p>创建实例直接运行，无法被替代</p>
+<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void __destruct ( void )</span><br></pre></td></tr></table></figure>
+
+<p>对象结束时运行</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>class 新的类 extends 原有类</p>
+<h2 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h2><h3 id="rsa加密原理"><a href="#rsa加密原理" class="headerlink" title="rsa加密原理"></a>rsa加密原理</h3><p>生成至少两个多位素数 q和p</p>
+<p>计算n&#x3D;q*p</p>
+<p>计算n的欧拉函数 及m&#x3D;（p-1）*（q-1)</p>
+<p>在（1，m）区间内找到一个跟m互素的数字e</p>
+<p>根据公式获得密文 </p>
+<p><img src="/../image/37.png" class="lazyload" data-srcset="/../image/37.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="37"></p>
+<h3 id="rsa解密原理"><a href="#rsa解密原理" class="headerlink" title="rsa解密原理"></a>rsa解密原理</h3><p>由n分解获得q，p的值</p>
+<p>计算n的欧拉函数m</p>
+<p>计算e在模m上的逆元 及 inverse（e，m）</p>
+<p>根据公式获得明文</p>
+<p><img src="/../image/38.png" class="lazyload" data-srcset="/../image/38.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="38"></p>
+<h3 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h3><p>正数     原码&#x3D;反码&#x3D;补码</p>
+<p>负数    原码最高位为1表示符号 </p>
+<p>​            反码 符号1不变，对其他位数进行取反</p>
+<p>​            补码 用反码加一，逢二进一</p>
+<h3 id="二进制取反运算"><a href="#二进制取反运算" class="headerlink" title="二进制取反运算"></a>二进制取反运算</h3><p>255内数字取反运算原码进行取反后，获得一个八位二进制</p>
+<p>八位二进制最高位为正负号判定     0为+   1为- </p>
+<p>最高位不动，对其他位数进行第二次取反</p>
+<p>对二次取反后的二进制数字+1 获得取反运算结果</p>
+<p>（便捷运算方式：原数字取反后获得整数x    x-256即为取反运算结果）、</p>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>由class开头定义类名</p>
+<p>一个类中包含类的属性及变量，类的方法及函数</p>
+<p>类拥有自己的伪变量$this </p>
+<p>调用类需要先创建实例 如 $a&#x3D; new  类名</p>
+<p>public  类内部外部与子类都可以调用</p>
+<p>protected 仅能受子类调用 实例中无法通过$x-&gt;  进行调用</p>
+<p>private 只有本类内部可以使用 子类和实例中均无法调用</p>
+
   </div>
   
   
@@ -2446,10 +2482,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2023-10-15T14:29:34+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2023-10-21T10:25:05+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Oct 15, 2023</p>
+    <p>更新于：Oct 21, 2023</p>
   </a>
 </div>
 
@@ -2588,9 +2624,19 @@ babye...</p>
   
 
 
-  <div class="">
-    <!-- pjax占位 -->
-  </div>
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="toc-text">构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0"><span class="toc-text">析构函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E6%89%BF"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RSA"><span class="toc-text">RSA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rsa%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86"><span class="toc-text">rsa加密原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rsa%E8%A7%A3%E5%AF%86%E5%8E%9F%E7%90%86"><span class="toc-text">rsa解密原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81"><span class="toc-text">补码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%8F%96%E5%8F%8D%E8%BF%90%E7%AE%97"><span class="toc-text">二进制取反运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-text">类</span></a></li></ol></li></ol>
+    </div>
+  </section>
 
   
 
@@ -3166,7 +3212,7 @@ babye...</p>
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Oliverial的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2023/10/15/php/","name":"php"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Oliverial的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"php","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/10/15/php/"},"author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Oliverial的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2023/10/15/php/","wordCount":0,"datePublished":"2023-10-15T06:29:34.000Z","dateModified":"2023-10-15T06:29:34.514Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Oliverial的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2023/10/15/php/","name":"php"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Oliverial的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"php","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/10/15/php/"},"author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Oliverial的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2023/10/15/php/","wordCount":0,"datePublished":"2023-10-15T06:29:34.000Z","dateModified":"2023-10-21T02:25:05.745Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
