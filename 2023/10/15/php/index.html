@@ -45,7 +45,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2023-10-15T06:29:34.000Z">
-<meta property="article:modified_time" content="2023-12-01T13:40:10.433Z">
+<meta property="article:modified_time" content="2023-12-28T14:03:42.074Z">
 <meta property="article:author" content="Oliveria">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1628,7 +1628,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1703590182367),
+    lastupdate: new Date(1703772240614),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2505,7 +2505,7 @@ action=""设置跳转网页url，默认为所在网站  method="post"传参为po
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!preg_match(&quot;/^[a-zA-Z ]*$/&quot;,$name</span><br></pre></td></tr></table></figure>
 
 <p>查询变量$name里是否含有不是字母的内容</p>
-<h3 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h3><h4 id="get"><a href="#get" class="headerlink" title="__get"></a>__get</h4><p>触发条件：对私有属性进行查看</p>
+<h3 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h3><h4 id="get"><a href="#get" class="headerlink" title="__get"></a>__get</h4><p>触发条件：对不存在属性或私有属性进行查看</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function __get($a)&#123;</span><br><span class="line">    echo &#x27;在直接获取私有成员属性得时候，自动调用了这个__get()方法&lt;br/&gt;&#x27;;</span><br><span class="line">    if(isset($this-&gt;$a))</span><br><span class="line">    &#123;</span><br><span class="line">        return ($this-&gt;$a);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return NULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="set"><a href="#set" class="headerlink" title="__set"></a>__set</h4><p>触发条件：对私有属性进行修改设置</p>
@@ -2530,7 +2530,7 @@ action=""设置跳转网页url，默认为所在网站  method="post"传参为po
 <h4 id="wakeup"><a href="#wakeup" class="headerlink" title="__wakeup"></a>__wakeup</h4><p>触发条件：使用unserialize()把实例反序列化</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function __wakeup()</span><br><span class="line">    &#123;</span><br><span class="line">     echo &quot;使用unserizalize()方法，自动调用此方法&quot;;</span><br><span class="line">     $this -&gt;age=520;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="__toString()"></a>__toString()</h4><p>触发条件：调用字符串输出对象</p>
+<h4 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="__toString()"></a>__toString()</h4><p>触发条件：调用字符串输出对象，当作字符串输出</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public function __toString()</span><br><span class="line">&#123;</span><br><span class="line">    return sprintf(&#x27;Person(&quot;%s&quot;,%s,&quot;%s&quot;)&#x27;,$this-&gt;name,$this-&gt;age,$this-&gt;sex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="invoke"><a href="#invoke" class="headerlink" title="__invoke()"></a>__invoke()</h4><p>触发条件：当对象当作方法使用</p>
@@ -2657,10 +2657,10 @@ action=""设置跳转网页url，默认为所在网站  method="post"传参为po
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2023-12-01T21:40:10+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2023-12-28T22:03:42+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Dec 1, 2023</p>
+    <p>更新于：Dec 28, 2023</p>
   </a>
 </div>
 
@@ -3394,7 +3394,7 @@ babye...</p>
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Oliverial的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2023/10/15/php/","name":"php"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Oliverial的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"php","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/10/15/php/"},"author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Oliverial的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2023/10/15/php/","wordCount":0,"datePublished":"2023-10-15T06:29:34.000Z","dateModified":"2023-12-01T13:40:10.433Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Oliverial的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2023/10/15/php/","name":"php"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Oliverial的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Oliverial的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"php","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2023/10/15/php/"},"author":{"@type":"Person","name":"Oliveria","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Oliverial的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2023/10/15/php/","wordCount":0,"datePublished":"2023-10-15T06:29:34.000Z","dateModified":"2023-12-28T14:03:42.074Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
