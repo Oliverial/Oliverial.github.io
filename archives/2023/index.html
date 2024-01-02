@@ -1624,7 +1624,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1703772240614),
+    lastupdate: new Date(1704195646255),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2384,6 +2384,65 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           <div class='post-wrapper'>
             <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/28/buu刷题ssti-反序列化/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Oliverial的blog">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="Oliverial的blog">
+    <meta itemprop="description" content="">
+  </span>
+  
+  
+  
+    <span hidden>
+      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  
+    
+    <h2 class="article-title"  itemprop="name headline">
+      <a href="/2023/12/28/buu%E5%88%B7%E9%A2%98ssti-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"  itemprop="url">
+        buu刷题ssti+反序列化
+      </a>
+    </h2>
+  
+  <div class='md article-desc' itemprop="articleBody">
+    
+      
+        [BJDCTF2020]Cookie is so stable测试ssti漏洞，输入4
+确定存在ssti，现在测试模板引擎，输入4，返回任然为
+
+确定模板引擎为Twig，Twig注入存在固定playload：
+123&#123;&#123;_self.env.registerUndefinedFilterCallback(&quot;exec&quot;)&#125;&#125;&#123;...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time itemprop="dateCreated datePublished" datetime="2023-12-28T22:04:40+08:00">2023-12-28</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2023/12/28/buu%E5%88%B7%E9%A2%98ssti-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/' itemprop="url">
+            Read More
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
   <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/25/反序列化/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Oliverial的blog">
@@ -2466,12 +2525,9 @@ serialize()和unserialize()函数将对象、数组、变量等转化为字符�
   <div class='md article-desc' itemprop="articleBody">
     
       
-        url_for()         #通过函数获取url
-redirect()       #重定向
-errorhandler()   #捕捉错误信息
-escape() #手动转义
- get_flashed_messages()  #显示闪现内容 
+        1234567from flask import Flask  app = Flask(__name__)    #创建实例@app.route(&quot;/&quot;)   #定义url路径,route()定义触发函数的urldef hello_world():    return &quot;&lt;p&gt;Hello, World!&lt;/p&gt;&quot;
 
+1&lt;c...
       
     
   </div>
@@ -2932,65 +2988,24 @@ CyberChef’s Secret打开压缩包获得密文
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/08/hello-world/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Oliverial的blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="Oliverial的blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2023/10/08/hello-world/"  itemprop="url">
-        Hello World
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2023-10-08T14:33:25+08:00">2023-10-08</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2023/10/08/hello-world/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
+    
+      <br>
+      <div class="prev-next">
+        
+        <p class="current">
+          1 / 2
+        </p>
+        
+          <a class="next" rel="next" href="/archives/2023/page/2/">
+            <section class="post next white-box shadow floatable blur">
+              &nbsp;Next&nbsp;<i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </section>
+          </a>
+        
+      </div>
     
   
 
@@ -3081,7 +3096,7 @@ Qu...
       
         <div class="webinfo-item">
           <div>文章数目：</div>
-          <div>10 篇</div>
+          <div>11 篇</div>
         </div>
       
 
@@ -3102,7 +3117,7 @@ Qu...
       
         <div class="webinfo-item">
           <div>最后活动时间：</div>
-          <div id="last-update-show">2023-12-28 日</div>
+          <div id="last-update-show">2024-01-02 日</div>
         </div>
       
     </div>
@@ -3127,7 +3142,7 @@ Qu...
 
 
   <div class='content'>
-    <ul class="list entry navigation"><li><a class="widget-last" href="/2023/12/25/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><div class="item"><time>2023-12-28</time></div><span>反序列化</span></a></li><li><a class="widget-last" href="/2023/10/15/php/"><div class="item"><time>2023-12-28</time></div><span>php</span></a></li><li><a class="widget-last" href="/2023/12/23/flask%E6%A1%86%E6%9E%B6/"><div class="item"><time>2023-12-23</time></div><span>flask框架</span></a></li><li><a class="widget-last" href="/2023/12/17/ssti/"><div class="item"><time>2023-12-23</time></div><span>ssti</span></a></li><li><a class="widget-last" href="/2023/12/17/buu-SSTI/"><div class="item"><time>2023-12-17</time></div><span>buu-SSTI</span></a></li></ul>
+    <ul class="list entry navigation"><li><a class="widget-last" href="/2023/12/28/buu%E5%88%B7%E9%A2%98ssti-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><div class="item"><time>2023-12-30</time></div><span>buu刷题ssti+反序列化</span></a></li><li><a class="widget-last" href="/2023/12/23/flask%E6%A1%86%E6%9E%B6/"><div class="item"><time>2023-12-30</time></div><span>flask框架</span></a></li><li><a class="widget-last" href="/2023/12/17/ssti/"><div class="item"><time>2023-12-30</time></div><span>ssti</span></a></li><li><a class="widget-last" href="/2023/12/25/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"><div class="item"><time>2023-12-28</time></div><span>反序列化</span></a></li><li><a class="widget-last" href="/2023/10/15/php/"><div class="item"><time>2023-12-28</time></div><span>php</span></a></li></ul>
   </div>
 </section>
 
