@@ -5,8 +5,8 @@
   <meta name="Volantis" content="5.8.0">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="http://example.com/archives/2023/11/"/>
+  
+  <link rel="canonical" href="http://example.com/2024/05/26/原型链/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -33,15 +33,19 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>Archive: 2023/11 - Jijoy的blog</title>
+  <title>原型链 - Jijoy的blog</title>
   <meta name="keywords" content="null">
   <meta desc name="description" content="Jijoy的blog - Jijoy - Jijoy的blog">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jijoy的blog">
-<meta property="og:url" content="http://example.com/archives/2023/11/index.html">
+  
+<meta property="og:type" content="article">
+<meta property="og:title" content="原型链">
+<meta property="og:url" content="http://example.com/2024/05/26/%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html">
 <meta property="og:site_name" content="Jijoy的blog">
+<meta property="og:description" content="从原型到原型链前面主要大概了解了一些原型链的一些知识，这里重点深化一下 prototype每个函数都有一个 prototype 属性  函数的 prototype 属性指向了一个对象，这个对象正是调用该构造函数而创建的实例的原型 这也就构成了第一层关系  proto每一个JavaScript对象(除了 null )都具有的一个属性，叫__proto__，这个属性会指向该对象的原型  这样我们就可以">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2024-05-26T13:48:25.000Z">
+<meta property="article:modified_time" content="2024-05-31T14:17:32.592Z">
 <meta property="article:author" content="Jijoy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -2052,7 +2056,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <!-- Custom Files bodyBegin end-->
     <!-- front-matter body_begin begin -->
     <!-- front-matter body_begin end -->
-    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur " style='opacity: 0' >
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow floatable blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -2287,7 +2291,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
-      <div id="half" class='cover-wrapper  search' style="display: ;">
+      <div id="none" class='cover-wrapper post search' style="display: none;">
         
   <div class='cover-bg lazyload placeholder' data-bg="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/static/10dc1ed9054de29b4eed4a6d6711cf06.jpg?x-oss-process=image%2fresize%2cm_lfit%2cw_1920%2ch_1080"></div>
 
@@ -2351,26 +2355,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper">
           
 <div id="l_main" class=''>
-	
-		
-  <section class="post-list">
-    
-      
-        
-          
-        
-          
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/25/buu-Web/">
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/26/原型链/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Jijoy的blog">
   </span>
@@ -2379,195 +2365,372 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <meta itemprop="description" content="">
   </span>
   
-  
+
+
   
     <span hidden>
       <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
     </span>
   
-  
+  <div class="article-meta" id="top">
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2023/11/25/buu-Web/"  itemprop="url">
-        buu-Web
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
     
-      
-        buu-WebSQL注入[极客大挑战 2019]LoveSQL联合查询
-[极客大挑战 2019]BabySQL过滤where ,or,union,select
-双写绕过，联合查询
-[极客大挑战 2019]HardSQLby，空格，and，&amp;&amp;，&#x3D;
-利用 like绕过&#x3D;
-利用括号绕过空格
-报错注入
-利用right()爆出剩下flag后删除重复部分
-[CISC...
-      
+    
+      <h1 class="title" itemprop="name headline">
+        原型链
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2024-05-26T21:48:25+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：May 26, 2024</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
     
   </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h2 id="从原型到原型链"><a href="#从原型到原型链" class="headerlink" title="从原型到原型链"></a>从原型到原型链</h2><p>前面主要大概了解了一些原型链的一些知识，这里重点深化一下</p>
+<h3 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h3><p>每个函数都有一个 prototype 属性</p>
+<p><img src="/../image/553.png" class="lazyload" data-srcset="/../image/553.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="553"></p>
+<p>函数的 prototype 属性指向了一个对象，这个对象正是调用该构造函数而创建的<strong>实例</strong>的原型</p>
+<p>这也就构成了第一层关系</p>
+<p><img src="/../image/554.png" class="lazyload" data-srcset="/../image/554.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="554"></p>
+<h3 id="proto"><a href="#proto" class="headerlink" title="proto"></a><strong>proto</strong></h3><p>每一个JavaScript对象(除了 null )都具有的一个属性，叫__proto__，这个属性会指向该对象的原型</p>
+<p><img src="/../image/555.png" class="lazyload" data-srcset="/../image/555.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="555"></p>
+<p>这样我们就可以更新第二层关系</p>
+<p><img src="/../image/556.png" class="lazyload" data-srcset="/../image/556.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="556"></p>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p>既然对象可以指向他的原型，那么同样的原型也可以指向该对象</p>
+<p>每个原型都有一个 constructor 属性指向关联的构造函数</p>
+<p>![屏幕截图 2024-05-27 202454](C:&#x2F;Users&#x2F;PC&#x2F;Pictures&#x2F;Screenshots&#x2F;屏幕截图 2024-05-27 202454.png)</p>
+<p>ok，更新我们的关系图</p>
+<p><img src="/../image/558.png" class="lazyload" data-srcset="/../image/558.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="558"></p>
+<p>当获取 person.constructor 时，其实 person 中并没有 constructor 属性,当不能读取到constructor 属性时，会从 person 的原型也就是 Person.prototype 中读取</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">person.constructor === Person.prototype.constructor</span><br></pre></td></tr></table></figure>
+
+<p>原型也是一个对象， 也就是说原型是通过 Object 构造函数生成的，那么我们就可以再次更新我们的关系图</p>
+<p><img src="/../image/559.png" class="lazyload" data-srcset="/../image/559.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="559"></p>
+<p>那么我们很容易就会去想到Object.prototype 的原型是什么</p>
+<p><img src="/../image/560.png" class="lazyload" data-srcset="/../image/560.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="560"></p>
+<p> Object.prototype._<em>proto</em>_ 的值为 null 也就是说Object.prototype 没有原型，所以当查找属性的时候查到 Object.prototype 就可以停止查找了</p>
+<p>我们再来跟新我们的关系图</p>
+<p><img src="/../image/561.png" class="lazyload" data-srcset="/../image/561.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="561"></p>
+<p>这里简单的通过图来理解了原型链，原型链的查找规则也很有意思</p>
+<p><img src="/../image/562.png" class="lazyload" data-srcset="/../image/562.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="562"></p>
+<p>其优先查找实例，当实例中无法查询到，就去查询其原型</p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>作用域是指程序源代码中定义变量的区域，作用域规定了如何查找变量，也就是确定当前执行代码对变量的访问权限</p>
+<p><img src="/../image/563.png" class="lazyload" data-srcset="/../image/563.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="563"></p>
+<p>JavaScript采用静态作用域，也就是说执行 foo 函数，先从 foo 函数内部查找是否有局部变量 value，如果没有，就根据书写的位置，查找上面一层的代码，也就是 value 等于 1，所以结果会打印 1</p>
+<p>ok，那我们来看一个很有意思的点</p>
+<p><img src="/../image/564.png" class="lazyload" data-srcset="/../image/564.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="564"></p>
+<p>JavaScript采用的是词法作用域，函数的作用域基于函数创建的位置</p>
+<p>JavaScript 函数的执行用到了作用域链，这个作用域链是在函数定义的时候创建的。嵌套的函数 f() 定义在这个作用域链里，其中的变量 scope 一定是局部变量，不管何时何地执行函数 f()，这种绑定在执行 f() 时依然有效</p>
+<h2 id="JavaScript执行"><a href="#JavaScript执行" class="headerlink" title="JavaScript执行"></a>JavaScript执行</h2><p>JavaScript的执行也是比较有特色的</p>
+<p>我们先通过代码来简单交接一下</p>
+<p><img src="/../image/566.png" class="lazyload" data-srcset="/../image/566.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="566"></p>
+<p><img src="/../image/565.png" class="lazyload" data-srcset="/../image/565.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="565"></p>
+<p>两端作业相同的代码执行结果却截然不同</p>
+<p>其原因就是在于 JavaScript 引擎并非一行一行地分析和执行程序，而是一段一段地分析执行</p>
+<p>要解释清楚这个，就需要先了解JavaScript 的可执行代码，即全局代码、函数代码、eval代码，而当执行到一个函数代码的时候，就会执行上下文栈，也就是说第一段代码是在执行一个函数代码，而第二段代码则是在执行一个全局代码</p>
+<p>这里我们理解一下一个概念，也就是上下文栈，其实也很好理解，如字面意思，其本质上是一个栈，有着栈特有的特性，先进后出</p>
+<p>上下文中有三个比较重要的概念</p>
+<p><strong>变量对象</strong> <strong>作用域链</strong> <strong>this</strong></p>
+<p>变量对象是与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明</p>
+<p>这里就会有几个概念的上下文</p>
+<h4 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h4><p>全局对象是预定义的对象，作为 JavaScript 的全局函数和全局属性的占位符。通过使用全局对象，可以访问所有其他所有预定义的对象、函数和属性</p>
+<p>在顶层 JavaScript 代码中，可以用关键字 this 引用全局对象。因为全局对象是作用域链的头，这意味着所有非限定性的变量和函数名都会作为该对象的属性来查询</p>
+<p>全局上下文中的变量对象就是全局对象</p>
+<h4 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h4><p>在函数上下文中，我们用活动对象(activation object, AO)来表示变量对象</p>
+<p>活动对象和变量对象其实是一个东西，但可在 JavaScript 环境中访问，只有到当进入一个执行上下文中，这个执行上下文的变量对象才会被激活</p>
+<p>解释明白这几个概念后，这里我们就可以来理解 JavaScript中代码的运行过程了</p>
+<ol>
+<li>进入执行上下文</li>
+<li>代码执行</li>
+</ol>
+<p>执行上下文时，会去检查变量对象的所有形参 ，函数声明以及变量声明</p>
+<p>在代码执行阶段，根据代码逻辑，会再次修改变量对象的属性值</p>
+<p>明白了变量对象，我们就来看下一个点，<strong>作用域链</strong></p>
+<p>我们了解到在查找对象的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级执行上下文的变量对象中查找，一直找到全局上下文的变量对象，而这也就是作用域链</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function foo() &#123;</span><br><span class="line">    function bar() &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是一个很简单的函数定义，那么我们来看他的作用域链</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">foo.[[scope]] = [</span><br><span class="line">  globalContext.VO</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">bar.[[scope]] = [</span><br><span class="line">    fooContext.AO,</span><br><span class="line">    globalContext.VO</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>然后我们激活函数，进入函数上下文后，VO&#x2F;AO 被创建就会将活动对象添加到作用链的前端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[AO].concat([[Scope]])</span><br></pre></td></tr></table></figure>
+
+<p>ok，我们用一个简单的实例来加深理解</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var scope = &quot;global scope&quot;;</span><br><span class="line">function checkscope()&#123;</span><br><span class="line">    var scope2 = &#x27;local scope&#x27;;</span><br><span class="line">    return scope2;</span><br><span class="line">&#125;</span><br><span class="line">checkscope()</span><br></pre></td></tr></table></figure>
+
+<p>checkscope 函数被创建，保存作用域链到 内部属性[[scope]]</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">checkscope.[[scope]] = [</span><br><span class="line">    globalContext.VO</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 函数执行上下文被压入执行上下文栈</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">    checkscopeContext,</span><br><span class="line">    globalContext</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>checkscope 函数并不立刻执行，开始做准备工作</p>
+<p>第一步：复制函数[[scope]]属性创建作用域链</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">checkscopeContext = &#123;</span><br><span class="line">    Scope: checkscope.[[scope]],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二步：用 arguments 创建活动对象，随后初始化活动对象，加入形参、函数声明、变量声明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">checkscopeContext = &#123;</span><br><span class="line">    AO: &#123;</span><br><span class="line">        arguments: &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;,</span><br><span class="line">        scope2: undefined</span><br><span class="line">    &#125;，</span><br><span class="line">    Scope: checkscope.[[scope]],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第三步：将活动对象压入 checkscope 作用域链顶端</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">checkscopeContext = &#123;</span><br><span class="line">    AO: &#123;</span><br><span class="line">        arguments: &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;,</span><br><span class="line">        scope2: undefined</span><br><span class="line">    &#125;,</span><br><span class="line">    Scope: [AO, [[Scope]]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>准备工作做完，开始执行函数，随着函数的执行，修改 AO 的属性值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">checkscopeContext = &#123;</span><br><span class="line">    AO: &#123;</span><br><span class="line">        arguments: &#123;</span><br><span class="line">            length: 0</span><br><span class="line">        &#125;,</span><br><span class="line">        scope2: &#x27;local scope&#x27;</span><br><span class="line">    &#125;,</span><br><span class="line">    Scope: [AO, [[Scope]]]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查找到 scope2 的值，返回后函数执行完毕，函数上下文从执行上下文栈中弹出</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">    globalContext</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>this</strong></p>
+<p>这里就比较有意思了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果 ref 是 Reference，并且 IsPropertyReference(ref) 是 true, 那么 this 的值为 GetBase(ref)</span><br><span class="line">如果 ref 是 Reference，并且 base value 值是 Environment Record, 那么this的值为 ImplicitThisValue(ref)</span><br><span class="line">如果 ref 不是 Reference，那么 this 的值为 undefined</span><br></pre></td></tr></table></figure>
+
+<p>这里需要解释几个函数</p>
+<p><strong>GetBase</strong> 返回 reference 的 base value</p>
+<p><strong>IsPropertyReference</strong> 如果 base value 是一个对象，就返回true</p>
+<p><strong>MemberExpression</strong>简单理解 其实就是()左边的部分</p>
+<p><strong>调用 GetValue，返回的将是具体的值，而不再是一个 Reference</strong></p>
+<p><strong>Reference</strong> 这个用例子来看会更好理解</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var foo = 1;</span><br><span class="line"></span><br><span class="line">// 对应的Reference是：</span><br><span class="line">var fooReference = &#123;</span><br><span class="line">    base: EnvironmentRecord,</span><br><span class="line">    name: &#x27;foo&#x27;,</span><br><span class="line">    strict: false</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var foo = &#123;</span><br><span class="line">    bar: function () &#123;</span><br><span class="line">        return this;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">foo.bar(); // foo</span><br><span class="line"></span><br><span class="line">// bar对应的Reference是：</span><br><span class="line">var BarReference = &#123;</span><br><span class="line">    base: foo,</span><br><span class="line">    propertyName: &#x27;bar&#x27;,</span><br><span class="line">    strict: false</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/567.png" class="lazyload" data-srcset="/../image/567.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="567"></p>
+<p>这里我们一个一个来理解</p>
+<h5 id="foo-bar"><a href="#foo-bar" class="headerlink" title="foo.bar()"></a>foo.bar()</h5><p>我们先看到他的Reference</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var Reference = &#123;</span><br><span class="line">  base: foo,</span><br><span class="line">  name: &#x27;bar&#x27;,</span><br><span class="line">  strict: false</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>根据我们之间给的条件</p>
+<blockquote>
+<p>如果 ref 是 Reference，并且 IsPropertyReference(ref) 是 true, 那么 this 的值为 GetBase(ref)</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this = GetBase(ref)，</span><br></pre></td></tr></table></figure>
+
+<p>也就是说 this 的值就是 foo</p>
+<h5 id="foo-bar-1"><a href="#foo-bar-1" class="headerlink" title="(foo.bar)()"></a>(foo.bar)()</h5><p>foo.bar 被 () 包住，但实际上 () 并没有对 MemberExpression 进行计算，所以其实跟示例 1 的结果是一样的</p>
+<h5 id="foo-bar-foo-bar"><a href="#foo-bar-foo-bar" class="headerlink" title="(foo.bar &#x3D; foo.bar)()"></a>(foo.bar &#x3D; foo.bar)()</h5><p>存在赋值运算符，即调用GetValue，所以返回的值不是 Reference 类型</p>
+<blockquote>
+<p>如果 ref 不是 Reference，那么 this 的值为 undefined</p>
+</blockquote>
+<p>this 为 undefined，非严格模式下，this 的值为 undefined 的时候，其值会被隐式转换为全局对象</p>
+<h5 id="false-foo-bar"><a href="#false-foo-bar" class="headerlink" title="(false || foo.bar)()"></a>(false || foo.bar)()</h5><p>存在逻辑运算，即调用GetValue，所以返回的值不是 Reference 类型</p>
+<blockquote>
+<p>如果 ref 不是 Reference，那么 this 的值为 undefined</p>
+</blockquote>
+<p>this 为 undefined，非严格模式下，this 的值为 undefined 的时候，其值会被隐式转换为全局对象</p>
+<h5 id="foo-bar-foo-bar-1"><a href="#foo-bar-foo-bar-1" class="headerlink" title="(foo.bar, foo.bar)()"></a>(foo.bar, foo.bar)()</h5><p>逗号操作符</p>
+<p>因为使用了 GetValue，所以返回的不是 Reference 类型，this 为 undefined</p>
+<p>我们简单总结一下就是用到各种操作符后，都将调用到 GetValue，导致返回值为非Reference 类型，this 即为 undefined</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包是指那些能够访问自由变量的函数</p>
+<p>自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量</p>
+<p>闭包 &#x3D; 函数 + 函数能够访问的自由变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line"></span><br><span class="line">function foo() &#123;</span><br><span class="line">    console.log(a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+
+<p>foo 函数可以访问变量 a，但是 a 既不是 foo 函数的局部变量，也不是 foo 函数的参数，所以 a 就是自由变量。</p>
+<p>那么，函数 foo + foo 函数访问的自由变量 a 就是构成了一个闭包</p>
+<p>这里我们补充一个定义</p>
+<blockquote>
+<ol>
+<li>即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）</li>
+<li>在代码中引用了自由变量</li>
+</ol>
+</blockquote>
+<p>用一个例子来加深对闭包的理解</p>
+<p><img src="/../image/568.png" class="lazyload" data-srcset="/../image/568.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="568"></p>
+<p><img src="/../image/569.png" class="lazyload" data-srcset="/../image/569.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="569"></p>
+<p>这里就很好的看出闭包的作用</p>
+<p>先来解释前面一段</p>
+<p>当执行 data[0] 函数的时候，data[0] 函数的作用域链为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data[0]Context = &#123;</span><br><span class="line">    Scope: [AO, globalContext.VO]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，当执行到 data[0] 函数的时候，函数已经从上下文栈弹出，所有会从 globalContext.VO 中查找，i 为 3，所以打印的结果就是 3</p>
+<p>data[1] 和 data[2] 是一样的道理</p>
+<p>第二段当执行 data[0] 函数的时候，data[0] 函数的作用域链发生了改变：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data[0]Context = &#123;</span><br><span class="line">    Scope: [AO, 匿名函数Context.AO globalContext.VO]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>data[0]Context 的 AO 并没有 i 值，所以会沿着作用域链从匿名函数 Context.AO 中查找，这时候就会找 i 为 0，找到了就不会往 globalContext.VO 中查找了，所以打印的结果就是0</p>
+<p>data[1] 和 data[2] 同理</p>
+
+  </div>
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2023-11-25T14:32:24+08:00">2023-11-25</time>
-        
-      </div>
+  
+    
+    <div class='footer'>
+       <!-- 参考资料、相关资料等 -->
       
-        <div>
-          <a class='readmore' href='/2023/11/25/buu-Web/' itemprop="url">
-            Read More
-          </a>
-        </div>
+       <!-- 相关文章 -->
+      
+      <!-- 版权声明组件 -->
+      
+      <!-- 打赏组件 -->
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-05-31T22:17:32+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：May 31, 2024</p>
+  </a>
 </div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/25/upload-labs/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Jijoy的blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="Jijoy的blog">
-    <meta itemprop="description" content="">
-  </span>
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2024/05/26/%E5%8E%9F%E5%9E%8B%E9%93%BE/&title=原型链 - Jijoy的blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2024/05/26/%E5%8E%9F%E5%9E%8B%E9%93%BE/&title=原型链 - Jijoy的blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2024/05/26/%E5%8E%9F%E5%9E%8B%E9%93%BE/&title=原型链 - Jijoy的blog&summary="
+          
+          >
+          
+            <img src="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
   
   
+
   
+    <div class="prev-next">
+      
+        <a class='prev' href='/2024/05/30/node%E5%B0%8F%E7%BB%83/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>node小练</p>
+          <p class='content'>[NPUCTF2020]验证🐎&#x2F;source给到源码
+1234567891011121314151617181920212223242526272829303132333435363...</p>
+        </a>
+      
+      
+        <a class='next' href='/2024/05/26/node-js/'>
+          <p class='title'>node.js<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'></p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+
+  <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+      <meta itemprop="discussionUrl" content="/2024/05/26/%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html#comments">
     </span>
-  
-  
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2023/11/25/upload-labs/"  itemprop="url">
-        upload-labs
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        文件上传upload-labs前端验证关闭前端js
-MIME验证抓包后对Content-Type修改
-黑名单绕过上传.htaccess apache配置文件
-等价扩展名绕过
-大小写绕过
-空格绕过
-点绕过
-::$DATA
-双写绕过
-点空点绕过
-白名单绕过%00截断
-图片马
-文件包含漏洞
-二次渲染使用010 Editor对比前后上传差异，在未修改处插入一句话木马
-条件竞争使用burp多线程攻击
-...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2023-11-25T11:45:55+08:00">2023-11-25</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2023/11/25/upload-labs/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
 
-</div>
+    <div id="layoutHelper-comments"></div>
 
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/13/sqli-labs/">
-  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Jijoy的blog">
-  </span>
-  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
-    <meta itemprop="name" content="Jijoy的blog">
-    <meta itemprop="description" content="">
-  </span>
-  
-  
-  
-    <span hidden>
-      <meta itemprop="image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-    </span>
-  
-  
-    
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2023/11/13/sqli-labs/"  itemprop="url">
-        sqli-labs
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
-    
-      
-        sql注入sql labs自带数据库information_schema，存在两个表tables和columns
-table_schema  储存了表名对应数据库名
-table_name  储存了数据库对应数据表名
-column_name 储存了数据库对应数据列名
-columns_schema  储存了数据表名对应数据库名
-注意table_name字段不是只存在于tables表，也是存在co...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2023-11-13T20:38:58+08:00">2023-11-13</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2023/11/13/sqli-labs/' itemprop="url">
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-    
-  </section>
-  
-    
-  
+  </article>
 
 
-	
+
+
+
+
 </div>
 <aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
   
@@ -2576,143 +2739,56 @@ columns_schema  储存了数据表名对应数据库名
     
     
       
-<section class="widget blogger desktop mobile pjax">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://th.bing.com/th/id/OIP.YdQxUIvUJlZeoL2ASN1RxwHaHa?pid=ImgDet&rs=1'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>Oliveria</h2>
-        
-        
-        
-          <p><span id="jinrishici-sentence">Jijoy的blog</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="mailto:#你的邮箱"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-
-    
-  
-
-  
-    
-    
-      
-
-    
-  
-
-  
-    
-    
-      
-<section class="widget desktop pjax">
-  
-  <header>
-    
-      <i class="fa-solid fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>28 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count"></div>
-        </div>
-      
-
-
-      
-
-      
-
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          <div id="last-update-show">2024-05-31 日</div>
-        </div>
-      
-    </div>
-  </div>
-</section>
-
-    
-  
-
-  
-    
-    
-      
-
-<section class="widget desktop mobile pjax">
-  
-  <header>
-    
-      <i class="fa-solid fa-clock WISTERIA fa-fw" aria-hidden="true"></i><span class='name'>最近更新</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <ul class="list entry navigation"><li><a class="widget-last" href="/2024/05/26/%E5%8E%9F%E5%9E%8B%E9%93%BE/"><div class="item"><time>2024-05-31</time></div><span>原型链</span></a></li><li><a class="widget-last" href="/2024/05/30/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/"><div class="item"><time>2024-05-31</time></div><span>原型链污染</span></a></li><li><a class="widget-last" href="/2024/05/30/node%E5%B0%8F%E7%BB%83/"><div class="item"><time>2024-05-31</time></div><span>node小练</span></a></li><li><a class="widget-last" href="/2024/05/09/JavaScript/"><div class="item"><time>2024-05-30</time></div><span>JavaScript</span></a></li><li><a class="widget-last" href="/2024/05/26/node-js/"><div class="item"><time>2024-05-26</time></div><span>node.js</span></a></li></ul>
-  </div>
-</section>
-
     
   
 
 
 <div class="widget-sticky pjax">
 
+  
+  
+
+
+  <section class="widget toc-wrapper desktop mobile " id="toc-div" >
+    
+  <header>
+    
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%8E%9F%E5%9E%8B%E5%88%B0%E5%8E%9F%E5%9E%8B%E9%93%BE"><span class="toc-text">从原型到原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#prototype"><span class="toc-text">prototype</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proto"><span class="toc-text">proto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constructor-NaN"><span class="toc-text">constructor</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E6%89%A7%E8%A1%8C"><span class="toc-text">JavaScript执行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">全局上下文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">函数上下文</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#foo-bar"><span class="toc-text">foo.bar()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#foo-bar-1"><span class="toc-text">(foo.bar)()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#foo-bar-foo-bar"><span class="toc-text">(foo.bar &#x3D; foo.bar)()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#false-foo-bar"><span class="toc-text">(false || foo.bar)()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#foo-bar-foo-bar-1"><span class="toc-text">(foo.bar, foo.bar)()</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E5%8C%85"><span class="toc-text">闭包</span></a></li></ol>
+    </div>
+  </section>
+
+  
+
 </div>
 
 
 <!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
 
   <div class="pjax">
     <!-- pjax占位 -->
@@ -2740,13 +2816,14 @@ columns_schema  储存了数据表名对应数据库名
 </aside>
 
 
+
           <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <pjax>
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -2755,14 +2832,14 @@ columns_schema  储存了数据表名对应数据库名
     // header
     var l_header=document.getElementById("l_header");
     
-    l_header.classList.remove("show");
+    l_header.classList.add("show");
     
     
       // cover
       var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
       var scroll_down=document.getElementById('scroll-down');
-      cover_wrapper.id="half";
-      cover_wrapper.style.display="";
+      cover_wrapper.id="none";
+      cover_wrapper.style.display="none";
       scroll_down.style.display="none";
     
   
@@ -3274,7 +3351,7 @@ columns_schema  储存了数据表名对应数据库名
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}},{"@type":"ListItem","position":2,"item":{"@id":"http://example.com/archives/","name":"Archive"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/archives/2023/","name":"2023"}},{"@type":"ListItem","position":4,"item":{"@id":"http://example.com/archives/2023/11/","name":"11"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"wordCount":0,"image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/05/26/原型链/","name":"原型链"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"原型链","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/05/26/%E5%8E%9F%E5%9E%8B%E9%93%BE/"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/05/26/%E5%8E%9F%E5%9E%8B%E9%93%BE/","wordCount":0,"datePublished":"2024-05-26T13:48:25.000Z","dateModified":"2024-05-31T14:17:32.592Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
